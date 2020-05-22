@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { register } from '../../actions/index';
 
 const Register = props => {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({});
 
     const handleChange = e => {
         setUser({

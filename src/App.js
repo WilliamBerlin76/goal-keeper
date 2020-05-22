@@ -1,22 +1,26 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import './App.css';
 
 import Register from './components/auth/register';
+import Nav from './components/nav/nav';
 
 function App() {
   return (
     <>
-      <Route 
-        exact path='/register'
-        render={props => <Register type='register'/>}
-      />
-      <Route 
-        exact path='/login'
-        render={props => <Register type='login'/>}
-      />
+      <Nav/>
+      <Switch>
+        <Route 
+          path='/register'
+          render={props => <Register type='register'/>}
+        />
+        <Route 
+          path='/login'
+          render={props => <Register type='login'/>}
+        />
+      </Switch>
     </>
   );
-}
+};
 
 export default App;

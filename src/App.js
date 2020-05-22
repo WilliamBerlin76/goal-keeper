@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 
+import Register from './components/auth/register';
+
 function App() {
   return (
-    <h1>Goal Keeper</h1>
+    <Register />
   );
 }
 

@@ -14,12 +14,12 @@ const Register = props => {
     };
 
     const handleSubmit = e => {
-        props.register(user)
+        props.register(user, props.type)
     };
 
     return (
         <>
-            <h2>Register</h2>
+            <h2>{props.type}</h2>
             <form>
                 <input
                     placeholder='Username'
@@ -40,7 +40,7 @@ const Register = props => {
                     onChange={handleChange}
                 />
             </form>
-            <button onClick={handleSubmit}>Register</button>
+            <button onClick={handleSubmit}>{props.type}</button>
         </>
     );
 };
@@ -54,4 +54,4 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     { register }
-)(Register)
+)(Register);

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import './App.css';
 
-import Register from './components/auth/register';
+import Register from './components/auth/authForm';
 import Nav from './components/nav/nav';
 
 function App() {

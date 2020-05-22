@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { register } from '../../actions/index';
+import { authenticate } from '../../actions/index';
 
-const Register = props => {
+const AuthForm = props => {
     const [user, setUser] = useState({});
 
     const handleChange = e => {
@@ -14,7 +14,7 @@ const Register = props => {
     };
 
     const handleSubmit = e => {
-        props.register(user, props.type)
+        props.authenticate(user, props.type)
     };
 
     return (
@@ -27,12 +27,14 @@ const Register = props => {
                     name='username'
                     onChange={handleChange}
                 />
-                <input
-                    placeholder='Email'
-                    type='text'
-                    name='email'
-                    onChange={handleChange}
-                />
+                {props.type === 'register' &&
+                    <input
+                        placeholder='Email'
+                        type='text'
+                        name='email'
+                        onChange={handleChange}
+                    />
+                }
                 <input
                     placeholder="Password"
                     type='password'
@@ -53,5 +55,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { register }
-)(Register);
+    { authenticate }
+)(AuthForm);

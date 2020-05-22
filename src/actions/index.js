@@ -3,7 +3,7 @@ import axios from 'axios';
 export const USER_START = 'USER_START';
 export const SET_USER = 'SET_USER';
 
-export const register = (userInfo, method) => dispatch => {
+export const authenticate = (userInfo, method) => dispatch => {
     dispatch({ type: USER_START });
 
     axios.post(`http://localhost:5000/api/auth/${method}`, userInfo)
@@ -14,6 +14,6 @@ export const register = (userInfo, method) => dispatch => {
             dispatch({ type: SET_USER, payload: user })
         })
         .catch(err => {
-            console.log('ERROR FROM REGISTER', err);
+            console.log('ERROR FROM auth', err);
         });
 }; 

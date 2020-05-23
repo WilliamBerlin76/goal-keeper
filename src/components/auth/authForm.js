@@ -15,6 +15,7 @@ const AuthForm = props => {
 
     const handleSubmit = e => {
         props.authenticate(user, props.type)
+        props.history.push('/dashboard')
     };
 
     return (

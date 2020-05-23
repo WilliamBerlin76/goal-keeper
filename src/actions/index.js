@@ -10,8 +10,8 @@ export const authenticate = (userInfo, method) => async dispatch => {
         .then(res => {
             let user;
             method === 'login' ? user = res.data.user : user = res.data.newUser;
-            sessionStorage.setItem('token', res.data.token)
-            dispatch({ type: SET_USER, payload: user })
+            sessionStorage.setItem('token', res.data.token);
+            dispatch({ type: SET_USER, payload: user });
         })
         .catch(err => {
             console.log('ERROR FROM auth', err);

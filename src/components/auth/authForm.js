@@ -13,8 +13,8 @@ const AuthForm = props => {
         });
     };
 
-    const handleSubmit = e => {
-        props.authenticate(user, props.type)
+    const handleSubmit = async e => {
+        await props.authenticate(user, props.type);
         props.history.push('/dashboard')
     };
 

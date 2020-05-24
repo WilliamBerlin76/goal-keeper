@@ -11,6 +11,11 @@ export const authenticate = (userInfo, method) => async dispatch => {
             let user;
             method === 'login' ? user = res.data.user : user = res.data.newUser;
             sessionStorage.setItem('token', res.data.token);
+            sessionStorage.setItem('persist-user', JSON.stringify({
+                id: user.id, 
+                userName: user.username, 
+                email: user.email
+            }))
             dispatch({ type: SET_USER, payload: user });
         })
         .catch(err => {

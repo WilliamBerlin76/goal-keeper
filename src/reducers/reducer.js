@@ -5,9 +5,9 @@ import {
 
 const initialState = {
     user: {
-        id: null,
-        userName: null,
-        email: null
+        id: sessionStorage.getItem('persist-user') ? JSON.parse(sessionStorage.getItem('persist-user')).id : null,
+        userName: sessionStorage.getItem('persist-user') ? JSON.parse(sessionStorage.getItem('persist-user')).userName : null,
+        email: sessionStorage.getItem('persist-user') ? JSON.parse(sessionStorage.getItem('persist-user')).email : null
     }
 }
 const reducer = (state = initialState, action) => {

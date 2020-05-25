@@ -1,6 +1,7 @@
 import {
     USER_START,
     SET_USER,
+    SET_CAT,
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -35,6 +36,13 @@ const reducer = (state = initialState, action) => {
                     username: action.payload.username,
                     email: action.payload.email
                 }
+            };
+        case SET_CAT:
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                categories: action.payload
             };
         default: return state
     };

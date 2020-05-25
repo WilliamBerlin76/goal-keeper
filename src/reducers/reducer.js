@@ -5,7 +5,7 @@ import {
 
 let localUser = localStorage.getItem('persist-user');
 let sessionUser = sessionStorage.getItem('persist-user');
-console.log(JSON.parse(localUser), sessionUser)
+
 const initialState = {
     user: {
         id: localUser ? JSON.parse(localUser).id : 
@@ -15,7 +15,7 @@ const initialState = {
         email: localUser ? JSON.parse(localUser).email : 
             sessionUser ? JSON.parse(sessionUser).email : null
     }
-}
+};
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_START:

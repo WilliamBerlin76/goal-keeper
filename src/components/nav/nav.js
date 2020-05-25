@@ -6,6 +6,10 @@ const Nav = () => {
         <>
             <NavLink to='/login'>Login</NavLink>
             <NavLink to='/register'>Register</NavLink>
+            <NavLink to='/' onClick={() => {
+                localStorage.clear();
+                sessionStorage.clear();
+            }}>Log Out</NavLink>
         </>
     );
 };

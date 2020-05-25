@@ -1,7 +1,10 @@
 import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const USER_START = 'USER_START';
 export const SET_USER = 'SET_USER';
+
+export const ADD_CAT = 'ADD_CAT';
 
 export const authenticate = (userInfo, method, remember) => async dispatch => {
     dispatch({ type: USER_START });
@@ -30,3 +33,14 @@ export const authenticate = (userInfo, method, remember) => async dispatch => {
             console.log('ERROR FROM auth', err);
         });
 }; 
+
+export const addCat = (userId, category) => dispatch => {
+    axiosWithAuth()
+        .post(`/api/${userId}/categories/${userId}/add`, category)
+        .then(cats => {
+            console.log(cats)
+        })
+        .catch(err => {
+            console.log('ADDCAT', err)
+        });
+};

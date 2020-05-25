@@ -14,7 +14,8 @@ const initialState = {
             sessionUser ? JSON.parse(sessionUser).username : null,
         email: localUser ? JSON.parse(localUser).email : 
             sessionUser ? JSON.parse(sessionUser).email : null
-    }
+    },
+    categories: []
 };
 const reducer = (state = initialState, action) => {
     switch (action.type) {

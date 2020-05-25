@@ -2,10 +2,15 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
+import CatForm from './catForm';
+
 const Dashboard = props => {
-    console.log(props.user)
+    
     return (
-        <h2>Hello {props.user.username}</h2>
+        <>
+            <h2>Hello {props.user.username}</h2>
+            <CatForm />
+        </>
     )
 };
 

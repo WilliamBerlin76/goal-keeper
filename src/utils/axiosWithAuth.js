@@ -1,7 +1,6 @@
 import axios from 'axios';
-import firebase from 'firebase';
 
-export const axiosWithAuth = () => {
+const axiosWithAuth = () => {
     const token = sessionStorage.getItem('token')
         
     return axios.create({
@@ -13,3 +12,5 @@ export const axiosWithAuth = () => {
         }
     });
 };
+
+export default axiosWithAuth;

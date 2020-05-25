@@ -5,6 +5,7 @@ import { authenticate } from '../../actions/index';
 
 const AuthForm = props => {
     const [user, setUser] = useState({});
+    const [remember, setRemember] = useState(false)
 
     const handleChange = e => {
         setUser({
@@ -14,7 +15,7 @@ const AuthForm = props => {
     };
 
     const handleSubmit = async e => {
-        await props.authenticate(user, props.type);
+        await props.authenticate(user, props.type, remember);
         props.history.push('/dashboard')
     };
 
@@ -41,6 +42,11 @@ const AuthForm = props => {
                     type='password'
                     name='password'
                     onChange={handleChange}
+                />
+                Remember me?
+                <input 
+                    type="checkbox"
+                    onChange={() => setRemember(!remember)}
                 />
             </form>
             <button onClick={handleSubmit}>{props.type}</button>

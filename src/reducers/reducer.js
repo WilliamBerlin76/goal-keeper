@@ -3,11 +3,17 @@ import {
     SET_USER,
 } from '../actions'
 
+let localUser = localStorage.getItem('persist-user');
+let sessionUser = sessionStorage.getItem('persist-user');
+console.log(JSON.parse(localUser), sessionUser)
 const initialState = {
     user: {
-        id: sessionStorage.getItem('persist-user') ? JSON.parse(sessionStorage.getItem('persist-user')).id : null,
-        userName: sessionStorage.getItem('persist-user') ? JSON.parse(sessionStorage.getItem('persist-user')).userName : null,
-        email: sessionStorage.getItem('persist-user') ? JSON.parse(sessionStorage.getItem('persist-user')).email : null
+        id: localUser ? JSON.parse(localUser).id : 
+            sessionUser ? JSON.parse(sessionUser).id : null,
+        username: localUser ? JSON.parse(localUser).username : 
+            sessionUser ? JSON.parse(sessionUser).username : null,
+        email: localUser ? JSON.parse(localUser).email : 
+            sessionUser ? JSON.parse(sessionUser).email : null
     }
 }
 const reducer = (state = initialState, action) => {
@@ -25,7 +31,7 @@ const reducer = (state = initialState, action) => {
                 error: '',
                 user: {
                     id: action.payload.id,
-                    userName: action.payload.username,
+                    username: action.payload.username,
                     email: action.payload.email
                 }
             };

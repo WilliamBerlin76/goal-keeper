@@ -1,27 +1,48 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 import { authenticate } from '../../actions/index';
 
-const AuthForm = props => {
-    const [user, setUser] = useState({});
-    const [remember, setRemember] = useState(false)
 
-    const handleChange = e => {
+const mapState = (state: { user: any; }) => {
+    return{
+        user: state.user
+    };
+};
+
+const mapDispatch = {
+    authenticate
+}
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux & {
+    type: string,
+};
+
+const AuthForm: React.FC<Props> = ({authenticate, type}) => {
+    const [user, setUser] = useState<object>({});
+    const [remember, setRemember] = useState<boolean>(false)
+    const history = useHistory();
+
+    const handleChange = (e: { target: { name: any; value: string; }; }) => {
         setUser({
             ...user,
             [e.target.name]: e.target.value
         });
     };
 
-    const handleSubmit = async e => {
-        await props.authenticate(user, props.type, remember);
-        props.history.push('/dashboard')
+    const handleSubmit = async () => {
+        await authenticate(user, type, remember);
+        history.push('/dashboard')
     };
 
     return (
         <>
-            <h2>{props.type}</h2>
+            <h2>{type}</h2>
             <form>
                 <input
                     placeholder='Username'
@@ -29,7 +50,7 @@ const AuthForm = props => {
                     name='username'
                     onChange={handleChange}
                 />
-                {props.type === 'register' &&
+                {type === 'register' &&
                     <input
                         placeholder='Email'
                         type='text'
@@ -49,18 +70,10 @@ const AuthForm = props => {
                     onChange={() => setRemember(!remember)}
                 />
             </form>
-            <button onClick={handleSubmit}>{props.type}</button>
+            <button onClick={handleSubmit}>{type}</button>
         </>
     );
 };
 
-const mapStateToProps = state => {
-    return{
-        user: state.user
-    };
-};
 
-export default connect(
-    mapStateToProps,
-    { authenticate }
-)(AuthForm);
+export default connector(AuthForm)

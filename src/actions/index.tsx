@@ -6,7 +6,7 @@ export const SET_USER = 'SET_USER';
 
 export const SET_CAT = 'SET_CAT';
 
-export const authenticate = (userInfo, method, remember) => async dispatch => {
+export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
 
     await axios.post(`http://localhost:5000/api/auth/${method}`, userInfo)
@@ -34,7 +34,7 @@ export const authenticate = (userInfo, method, remember) => async dispatch => {
         });
 }; 
 
-export const addCat = (userId, category) => dispatch => {
+export const addCat = (userId: number, category: object) => (dispatch: any) => {
     axiosWithAuth()
         .post(`/api/${userId}/categories/${userId}/add`, category)
         .then(res => {
@@ -45,7 +45,7 @@ export const addCat = (userId, category) => dispatch => {
         });
 };
 
-export const getCats = userId => dispatch => {
+export const getCats = (userId: number) => (dispatch: any) => {
     axiosWithAuth()
         .get(`/api/${userId}/categories/${userId}`)
         .then(res => {

@@ -8,7 +8,7 @@ import Dashboard from './components/dashboard/dashboard';
 
 import PrivateRoute from './utils/PrivateRoute';
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <Nav/>

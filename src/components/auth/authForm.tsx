@@ -28,7 +28,7 @@ const AuthForm: React.FC<Props> = ({authenticate, type}) => {
     const [remember, setRemember] = useState<boolean>(false)
     const history = useHistory();
 
-    const handleChange = (e: { target: { name: any; value: string; }; }) => {
+    const handleChange = (e: any) => {
         setUser({
             ...user,
             [e.target.name]: e.target.value

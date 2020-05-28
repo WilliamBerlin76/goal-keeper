@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import CatForm from './catForm';
+import CatCard from './catCard';
 import { getCats } from '../../actions/index';
 
 const mapState = (state: {
@@ -10,13 +11,16 @@ const mapState = (state: {
                         id: number;
                         username: string
                     }; 
-                    categories: Array<any>
+                    categories: Array<{
+                        id: number;
+                        name: string;
+                    }>
                 }) => {
-    return{
-        user: state.user,
-        categories: state.categories
+        return ({
+            user: state.user,
+            categories: state.categories
+        });
     };
-};
 
 const mapDispatch = { getCats };
 
@@ -25,7 +29,6 @@ const connector = connect(mapState, mapDispatch);
 type Props = ConnectedProps<typeof connector>;
 
 const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
-    
     useEffect(() => {
         getCats(user.id)
     }, [getCats, user.id]);
@@ -37,7 +40,10 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
             <h3>categories</h3>
             {categories.map(cat => {
                 return(
-                <p key={cat.id}>{cat.name}</p>
+                <CatCard 
+                    key={cat.id}
+                    name={cat.name}
+                />
                 );
             })}
         </>

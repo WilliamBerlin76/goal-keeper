@@ -1,20 +1,35 @@
 import React, { useState } from 'react';
 import CreateTwoToneIcon from '@material-ui/icons/CreateTwoTone';
-import axiosWithAuth from '../../utils/axiosWithAuth';
+import { updateCat } from '../../actions/index';
 
-interface Props {
+import { connect, ConnectedProps } from 'react-redux';
+
+const mapState = (state: {
+                    user: {
+                        id: number;
+                    }; 
+                }) => {
+            return ({
+                user: state.user,
+            });
+};
+
+const mapDispatch = { updateCat };
+
+const connector = connect(mapState, mapDispatch);
+
+type Props = ConnectedProps<typeof connector> & {
     name: string;
-    user: {id: number};
     catId: number;
 };
 
 interface nameTypes {
     name: string;
-}
+};
 
-const CatCard: React.FC<Props> = ({ catId, user, name }) => {
+const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
     const [canEdit, setCanEdit] = useState<boolean>(false);
-    const [newName, setNewName] = useState<nameTypes>({name: ''});
+    const [newName, setNewName] = useState<nameTypes>({name: name});
     const [displayName, setDisplayName] = useState<string>(name)
 
     const bolden = (e: any) => {
@@ -32,16 +47,9 @@ const CatCard: React.FC<Props> = ({ catId, user, name }) => {
     };
 
     const handleSubmit = (e: any) => {
-        axiosWithAuth()
-            .put(`/api/${user.id}/categories/${catId}/update`, newName)
-            .then(res => {
-                setDisplayName(res.data.name)
-                setCanEdit(!canEdit)
-            })
-            .catch(err => {
-                console.log(err);
-                setCanEdit(!canEdit)
-            });
+        updateCat(user.id, catId, newName);
+        setCanEdit(!canEdit);
+        setDisplayName(newName.name)
     };
 
     return(
@@ -49,7 +57,7 @@ const CatCard: React.FC<Props> = ({ catId, user, name }) => {
             {canEdit ? 
                 <>
                     <input 
-                        placeholder={name}
+                        value={newName.name}
                         name='name'
                         onChange={handleChange}
                     />
@@ -72,4 +80,4 @@ const CatCard: React.FC<Props> = ({ catId, user, name }) => {
     );
 };
 
-export default CatCard;
+export default connector(CatCard);

@@ -5,6 +5,7 @@ export const USER_START = 'USER_START';
 export const SET_USER = 'SET_USER';
 
 export const SET_CAT = 'SET_CAT';
+export const EDIT_CAT = 'EDIT_CAT';
 
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
@@ -45,6 +46,17 @@ export const addCat = (userId: number, category: object) => (dispatch: any) => {
         });
 };
 
+export const updateCat = (userId: number, catId: number, change: object) => (dispatch: any) => {
+    axiosWithAuth()
+        .put(`/api/${userId}/categories/${catId}/update`, change)
+        .then(res => {
+            dispatch({ type: EDIT_CAT, payload: res.data});
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
 export const getCats = (userId: number) => (dispatch: any) => {
     axiosWithAuth()
         .get(`/api/${userId}/categories/${userId}`)
@@ -54,4 +66,4 @@ export const getCats = (userId: number) => (dispatch: any) => {
         .catch(err => {
             console.log('GETCAT', err)
         })
-}
+};

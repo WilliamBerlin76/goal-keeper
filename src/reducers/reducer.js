@@ -2,6 +2,7 @@ import {
     USER_START,
     SET_USER,
     SET_CAT,
+    EDIT_CAT
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -43,6 +44,19 @@ const reducer = (state = initialState, action) => {
                 isFetching: false,
                 error: '',
                 categories: action.payload
+            };
+        case EDIT_CAT:
+            let checkId = parseInt(action.payload.id)
+            return{
+                ...state,
+                isFetching: false,
+                error: '',
+                categories: state.categories.map(cat => {
+                    if (checkId === cat.id){
+                        cat.name = action.payload.name;
+                    };
+                    return cat;
+                })
             };
         default: return state
     };

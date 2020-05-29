@@ -20,7 +20,7 @@ const mapState = (state: {
             user: state.user,
             categories: state.categories
         });
-    };
+};
 
 const mapDispatch = { getCats };
 
@@ -44,7 +44,6 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
                     key={cat.id}
                     catId={cat.id}
                     name={cat.name}
-                    user={user}
                 />
                 );
             })}

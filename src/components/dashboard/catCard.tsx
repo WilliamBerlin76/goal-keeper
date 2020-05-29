@@ -29,6 +29,7 @@ interface nameTypes {
 
 const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
     const [canEdit, setCanEdit] = useState<boolean>(false);
+    const [showPen, setShowPen] = useState<boolean>(false)
     const [newName, setNewName] = useState<nameTypes>({name: name});
     const [displayName, setDisplayName] = useState<string>(name)
 
@@ -53,7 +54,10 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
     };
 
     return(
-        <div>
+        <div
+            onMouseOver={() => setShowPen(true)}
+            onMouseLeave={() => setShowPen(false)}
+        >
             {canEdit ? 
                 <>
                     <input 
@@ -68,14 +72,16 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
                 :
                 <span>{displayName}</span>
             }
-            <CreateTwoToneIcon 
-                fontSize='small' 
-                opacity='.3'
-                display='none'
-                onMouseOver={bolden}
-                onMouseLeave={grey}
-                onClick={() => setCanEdit(!canEdit)}
-            />
+            {showPen && (
+                  <CreateTwoToneIcon 
+                  fontSize='small' 
+                  opacity='.3'
+                  display='none'
+                  onMouseOver={bolden}
+                  onMouseLeave={grey}
+                  onClick={() => setCanEdit(!canEdit)}
+              />
+            )}
         </div>
     );
 };

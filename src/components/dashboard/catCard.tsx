@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CreateTwoToneIcon from '@material-ui/icons/CreateTwoTone';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { updateCat } from '../../actions/index';
 
 import { connect, ConnectedProps } from 'react-redux';
@@ -73,14 +74,21 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
                 <span>{displayName}</span>
             }
             {showPen && (
-                  <CreateTwoToneIcon 
-                  fontSize='small' 
-                  opacity='.3'
-                  display='none'
-                  onMouseOver={bolden}
-                  onMouseLeave={grey}
-                  onClick={() => setCanEdit(!canEdit)}
-              />
+                <>
+                    <CreateTwoToneIcon 
+                        fontSize='small' 
+                        opacity='.3'
+                        onMouseOver={bolden}
+                        onMouseLeave={grey}
+                        onClick={() => setCanEdit(!canEdit)}
+                    />
+                    <DeleteIcon 
+                        fontSize='small'
+                        opacity='.3'
+                        onMouseOver={bolden}
+                        onMouseLeave={grey}
+                    />
+                </>
             )}
         </div>
     );

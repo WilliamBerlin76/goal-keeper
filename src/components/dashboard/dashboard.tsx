@@ -42,7 +42,9 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
                 return(
                 <CatCard 
                     key={cat.id}
+                    catId={cat.id}
                     name={cat.name}
+                    user={user}
                 />
                 );
             })}

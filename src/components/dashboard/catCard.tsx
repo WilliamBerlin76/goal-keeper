@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CreateTwoToneIcon from '@material-ui/icons/CreateTwoTone';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { updateCat, deleteCat } from '../../actions/index';
@@ -35,6 +35,10 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
     const [newName, setNewName] = useState<nameTypes>({name: name});
     const [displayName, setDisplayName] = useState<string>(name);
 
+    useEffect(() => {
+        setDisplayName(name)
+    }, [name])
+
     const bolden = (e: any) => {
         e.target.style.opacity = 1;
         e.target.style.cursor = 'pointer';
@@ -52,7 +56,6 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
     const handleSubmit = (e: any) => {
         updateCat(user.id, catId, newName);
         setCanEdit(!canEdit);
-        setDisplayName(newName.name)
     };
 
     const handleDelete = (e: any) => {

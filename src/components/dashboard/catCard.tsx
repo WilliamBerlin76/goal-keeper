@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CreateTwoToneIcon from '@material-ui/icons/CreateTwoTone';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { updateCat } from '../../actions/index';
+import { updateCat, deleteCat } from '../../actions/index';
 
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -15,7 +15,7 @@ const mapState = (state: {
             });
 };
 
-const mapDispatch = { updateCat };
+const mapDispatch = { updateCat, deleteCat };
 
 const connector = connect(mapState, mapDispatch);
 
@@ -28,11 +28,12 @@ interface nameTypes {
     name: string;
 };
 
-const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
+const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) => {
     const [canEdit, setCanEdit] = useState<boolean>(false);
-    const [showPen, setShowPen] = useState<boolean>(false)
+    const [canDelete, setCanDelete] = useState<boolean>(false)
+    const [showPen, setShowPen] = useState<boolean>(false);
     const [newName, setNewName] = useState<nameTypes>({name: name});
-    const [displayName, setDisplayName] = useState<string>(name)
+    const [displayName, setDisplayName] = useState<string>(name);
 
     const bolden = (e: any) => {
         e.target.style.opacity = 1;
@@ -52,6 +53,11 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
         updateCat(user.id, catId, newName);
         setCanEdit(!canEdit);
         setDisplayName(newName.name)
+    };
+
+    const handleDelete = (e: any) => {
+        deleteCat(user.id, catId);
+        setCanDelete(false);
     };
 
     return(
@@ -87,8 +93,16 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat }) => {
                         opacity='.3'
                         onMouseOver={bolden}
                         onMouseLeave={grey}
+                        onClick={() => setCanDelete(!canDelete)}
                     />
                 </>
+            )}
+            {canDelete && (
+                <div>
+                    <p>Are you sure you want to delete this category?</p>
+                    <button onClick={handleDelete}>Yes</button>
+                    <button onClick={() => setCanDelete(false)}>No</button>
+                </div>
             )}
         </div>
     );

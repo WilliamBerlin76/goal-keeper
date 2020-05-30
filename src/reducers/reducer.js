@@ -2,7 +2,8 @@ import {
     USER_START,
     SET_USER,
     SET_CAT,
-    EDIT_CAT
+    EDIT_CAT,
+    DELETE_CAT
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -58,6 +59,13 @@ const reducer = (state = initialState, action) => {
                     return cat;
                 })
             };
+        case DELETE_CAT:
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                categories: state.categories.filter(cat => cat.id !== action.payload)
+            }
         default: return state
     };
 };

@@ -6,6 +6,7 @@ export const SET_USER = 'SET_USER';
 
 export const SET_CAT = 'SET_CAT';
 export const EDIT_CAT = 'EDIT_CAT';
+export const DELETE_CAT = 'DELETE_CAT'
 
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
@@ -57,6 +58,17 @@ export const updateCat = (userId: number, catId: number, change: object) => (dis
         });
 };
 
+export const deleteCat = (userId: number, catId: number) => (dispatch: any) => {
+    axiosWithAuth()
+        .delete(`/api/${userId}/categories/${catId}/remove`)
+        .then(res => {
+            dispatch({ type: DELETE_CAT, payload: catId})
+        })
+        .catch(err => {
+            console.log(err)
+        });
+};
+
 export const getCats = (userId: number) => (dispatch: any) => {
     axiosWithAuth()
         .get(`/api/${userId}/categories/${userId}`)
@@ -67,3 +79,4 @@ export const getCats = (userId: number) => (dispatch: any) => {
             console.log('GETCAT', err)
         })
 };
+

@@ -32,7 +32,7 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
     useEffect(() => {
         getCats(user.id)
     }, [getCats, user.id]);
-
+    
     return (
         <>
             <h2>Hello {user.username}</h2>

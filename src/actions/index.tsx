@@ -76,7 +76,7 @@ export const getCats = (userId: number) => (dispatch: any) => {
             dispatch({ type: SET_CAT, payload: res.data.categories})
         })
         .catch(err => {
-            console.log('GETCAT', err)
+            alert(err.response.data.message)
         })
 };
 

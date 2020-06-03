@@ -3,6 +3,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const USER_START = 'USER_START';
 export const SET_USER = 'SET_USER';
+export const AUTH_ERR = 'AUTH_ERR';
 
 export const SET_CAT = 'SET_CAT';
 export const EDIT_CAT = 'EDIT_CAT';
@@ -33,6 +34,7 @@ export const authenticate = (userInfo: object, method: string, remember: boolean
         })
         .catch(err => {
             console.log('ERROR FROM auth', err);
+            dispatch({ type: AUTH_ERR, payload: err.response.data.message})
         });
 }; 
 

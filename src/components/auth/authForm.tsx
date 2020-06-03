@@ -5,9 +5,10 @@ import { useHistory } from "react-router-dom";
 import { authenticate } from '../../actions/index';
 
 
-const mapState = (state: { user: any; }) => {
+const mapState = (state: { user: object; error: string; }) => {
     return{
-        user: state.user
+        user: state.user,
+        error: state.error
     };
 };
 
@@ -23,11 +24,10 @@ type Props = PropsFromRedux & {
     type: string,
 };
 
-const AuthForm: React.FC<Props> = ({authenticate, type}) => {
+const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
     const [user, setUser] = useState<object>({});
     const [remember, setRemember] = useState<boolean>(false)
     const history = useHistory();
-
     const handleChange = (e: any) => {
         setUser({
             ...user,
@@ -70,6 +70,9 @@ const AuthForm: React.FC<Props> = ({authenticate, type}) => {
                     onChange={() => setRemember(!remember)}
                 />
             </form>
+            {error && (
+                <p>{error}</p>
+            )}
             <button onClick={handleSubmit}>{type}</button>
         </>
     );

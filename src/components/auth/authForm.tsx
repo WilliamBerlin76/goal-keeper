@@ -14,7 +14,7 @@ const mapState = (state: { user: object; error: string; }) => {
 
 const mapDispatch = {
     authenticate
-}
+};
 
 const connector = connect(mapState, mapDispatch);
 
@@ -26,7 +26,7 @@ type Props = PropsFromRedux & {
 
 const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
     const [user, setUser] = useState<object>({});
-    const [remember, setRemember] = useState<boolean>(false)
+    const [remember, setRemember] = useState<boolean>(false);
     const history = useHistory();
     const handleChange = (e: any) => {
         setUser({
@@ -79,4 +79,4 @@ const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
 };
 
 
-export default connector(AuthForm)
+export default connector(AuthForm);

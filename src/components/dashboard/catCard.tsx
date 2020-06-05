@@ -5,6 +5,8 @@ import { updateCat, deleteCat } from '../../actions/index';
 
 import { connect, ConnectedProps } from 'react-redux';
 
+import './dashboard.scss';
+
 const mapState = (state: {
                     user: {
                         id: number;
@@ -67,6 +69,7 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
         <div
             onMouseOver={() => setShowPen(true)}
             onMouseLeave={() => setShowPen(false)}
+            className='cat-card'
         >
             {canEdit ? 
                 <>
@@ -83,7 +86,7 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
                 <span>{displayName}</span>
             }
             {showPen && (
-                <>
+                <div className='cat-buttons'>
                     <CreateTwoToneIcon 
                         fontSize='small' 
                         opacity='.3'
@@ -98,7 +101,7 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
                         onMouseLeave={grey}
                         onClick={() => setCanDelete(!canDelete)}
                     />
-                </>
+                </div>
             )}
             {canDelete && (
                 <div>

@@ -66,13 +66,14 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
     };
 
     return(
+        <>
         <div
             onMouseOver={() => setShowPen(true)}
             onMouseLeave={() => setShowPen(false)}
             className='cat-card'
         >
             {canEdit ? 
-                <>
+                <div>
                     <input 
                         value={newName.name}
                         name='name'
@@ -81,7 +82,7 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
                     <button 
                         onClick={handleSubmit}
                     >Save</button>
-                </>
+                </div>
                 :
                 <span>{displayName}</span>
             }
@@ -103,14 +104,15 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
                     />
                 </div>
             )}
-            {canDelete && (
-                <div>
-                    <p>Are you sure you want to delete this category?</p>
-                    <button onClick={handleDelete}>Yes</button>
-                    <button onClick={() => setCanDelete(false)}>No</button>
-                </div>
-            )}
         </div>
+        {canDelete && (
+            <div>
+                <p>Are you sure you want to delete this category?</p>
+                <button onClick={handleDelete}>Yes</button>
+                <button onClick={() => setCanDelete(false)}>No</button>
+            </div>
+        )}
+        </>
     );
 };
 

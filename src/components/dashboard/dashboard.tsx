@@ -38,6 +38,7 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
             <h2>Hello {user.username}</h2>
             <CatForm />
             <h3>categories</h3>
+            <p>(Click a category to view your goals)</p>
             {categories.map(cat => {
                 return(
                 <CatCard 

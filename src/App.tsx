@@ -23,7 +23,10 @@ const App: React.FC = () => {
           render={props => <Register type='login' {...props}/>}
         />
         <PrivateRoute path='/dashboard' component={Dashboard} />
-        <PrivateRoute path='/goals' component={GoalList}/>
+        <PrivateRoute 
+          path='/:catId/goals' 
+          component={GoalList}
+        />
       </Switch>
     </>
   );

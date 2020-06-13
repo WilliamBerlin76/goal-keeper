@@ -4,7 +4,8 @@ import {
     SET_CAT,
     EDIT_CAT,
     DELETE_CAT,
-    AUTH_ERR
+    AUTH_ERR,
+    ADD_GOAL
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -19,7 +20,8 @@ const initialState = {
         email: localUser ? JSON.parse(localUser).email : 
             sessionUser ? JSON.parse(sessionUser).email : null
     },
-    categories: []
+    categories: [],
+    goals: []
 };
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -72,6 +74,13 @@ const reducer = (state = initialState, action) => {
                 isFetching: false,
                 error: '',
                 categories: state.categories.filter(cat => cat.id !== action.payload)
+            };
+        case ADD_GOAL:
+            return {
+                ...state,
+                isFetching:false,
+                error: '',
+                goals: action.payload
             }
         default: return state
     };

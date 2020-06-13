@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import CreateTwoToneIcon from '@material-ui/icons/CreateTwoTone';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { updateCat, deleteCat } from '../../actions/index';
@@ -36,6 +38,7 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
     const [showPen, setShowPen] = useState<boolean>(false);
     const [newName, setNewName] = useState<nameTypes>({name: name});
     const [displayName, setDisplayName] = useState<string>(name);
+    const history = useHistory();
 
     useEffect(() => {
         setDisplayName(name)
@@ -65,6 +68,10 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
         setCanDelete(false);
     };
 
+    const gotoGoals = (e: any) => {
+        history.push(`/${catId}/goals`)
+    };
+
     return(
         <>
         <div
@@ -84,7 +91,9 @@ const CatCard: React.FC<Props> = ({ catId, user, name, updateCat, deleteCat }) =
                     >Save</button>
                 </div>
                 :
-                <span>{displayName}</span>
+                <span
+                    onClick={gotoGoals}                
+                >{displayName}</span>
             }
             {showPen && (
                 <div className='cat-buttons'>

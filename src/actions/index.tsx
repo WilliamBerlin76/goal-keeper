@@ -10,7 +10,7 @@ export const EDIT_CAT = 'EDIT_CAT';
 export const DELETE_CAT = 'DELETE_CAT';
 
 export const ADD_GOAL = 'ADD_GOAL';
-
+export const SET_GOALS = 'SET_GOALS'
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
 
@@ -85,15 +85,24 @@ export const getCats = (userId: number) => (dispatch: any) => {
 };
 
 export const addGoal = (userId: number, catId: string, goal: object) => (dispatch: any) => {
-    console.log(userId, goal)
     axiosWithAuth()
-        .post(`/api/${userId}/goals/${parseInt(catId)}/add`, goal)
+        .post(`/api/${userId}/goals/${catId}/add`, goal)
         .then(res => {
-            console.log(res)
             dispatch({ type: ADD_GOAL, payload: res.data.goals})
         })
         .catch(err => {
             console.log(err);
         });
 };
+
+export const getGoals = (userId: number, catId: string) => (dispatch: any) => {
+    axiosWithAuth() 
+        .get(`/api/${userId}/goals/${catId}`)
+        .then(res => {
+            dispatch({ type: SET_GOALS, payload: res.data.goals})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 

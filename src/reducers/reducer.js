@@ -5,7 +5,8 @@ import {
     EDIT_CAT,
     DELETE_CAT,
     AUTH_ERR,
-    ADD_GOAL
+    ADD_GOAL,
+    SET_GOALS
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -79,6 +80,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching:false,
+                error: '',
+                goals: action.payload
+            };
+        case SET_GOALS:
+            return {
+                ...state,
+                isFetching: false,
                 error: '',
                 goals: action.payload
             }

@@ -3,6 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { connect, ConnectedProps } from 'react-redux';
 
 import GoalForm from './goalForm';
+import GoalCard from './goalCard';
 
 import { getGoals } from '../../actions/index'; 
 
@@ -47,7 +48,10 @@ const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
             />
             {goals.map(goal => {
                 return (
-                    <p key={goal.id}>{goal.name}</p>
+                    <GoalCard
+                        goalId={goal.id} 
+                        name={goal.name}
+                    />
                 )
             })}
         </>

@@ -44,13 +44,28 @@ const GoalCard: React.FC<Props> = ({ name }) => {
     e.target.style.opacity = 0.3;
   };
 
+  const handleChange = (e: any) => {
+    setNewName({
+        name: e.target.value
+    });
+  };
+
   return (
     <div
       onMouseOver={() => setShowPen(true)}
       onMouseLeave={() => setShowPen(false)}
       className="goal-card"
     >
-      <span>{name}</span>
+        {canEdit ? (
+          <div>
+            <input value={newName.name} name="name" onChange={handleChange} />
+            <button>Save</button>
+          </div>
+        ) : (
+            <span>{displayName}</span>
+        )
+    }
+      
       {showPen && (
         <div className="goal-buttons">
           <CreateTwoToneIcon

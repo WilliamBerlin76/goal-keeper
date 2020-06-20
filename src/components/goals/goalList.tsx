@@ -10,16 +10,19 @@ import { getGoals } from '../../actions/index';
 const mapState = (state: {
                     user: {
                         username: string;
-                        id: number
-                    }
-                    goals: Array<{
                         id: number;
-                        name: string
-                    }>
+                    }
+                    goals: {
+                        category: string
+                        goals: Array<{
+                            id: number;
+                            name: string;
+                        }>
+                    }
                 }) => {
             return ({
                 user: state.user,
-                goals: state.goals
+                goals: state.goals,
         });
 };    
 
@@ -36,24 +39,27 @@ interface GoalProps extends RouteComponentProps<RouterProps>{};
 type Props = ConnectedProps<typeof connector> & RouterProps & GoalProps;
 
 const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
-    
+    console.log(goals)
     useEffect(() => {
         getGoals(user.id, match.params.catId)
     }, [getGoals, user.id, match.params.catId])
     return (
         <>  
-            <h2>Goals</h2>
+            <h2>Goals: {goals.category}</h2>
             <GoalForm 
                 catId={match.params.catId}
             />
-            {goals.map(goal => {
-                return (
-                    <GoalCard
-                        goalId={goal.id} 
-                        name={goal.name}
-                    />
-                )
-            })}
+            {goals.goals && (
+                goals.goals.map(goal => {
+                    return (
+                        <GoalCard
+                            key={goal.id}
+                            goalId={goal.id} 
+                            name={goal.name}
+                        />
+                    )
+                })
+            )}
         </>
     )
 };

@@ -99,7 +99,7 @@ export const getGoals = (userId: number, catId: string) => (dispatch: any) => {
     axiosWithAuth() 
         .get(`/api/${userId}/goals/${catId}`)
         .then(res => {
-            dispatch({ type: SET_GOALS, payload: res.data.goals})
+            dispatch({ type: SET_GOALS, payload: res.data})
         })
         .catch(err => {
             console.log(err)

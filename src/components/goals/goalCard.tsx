@@ -6,16 +6,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect, ConnectedProps } from "react-redux";
 
-import './goals.scss';
+import "./goals.scss";
 
 const mapState = (state: {
-  user: {
-    id: number;
-  };
-}) => {
-  return {
-    user: state.user,
-  };
+            user: {
+              id: number;
+            };
+          }) => {
+            return {
+              user: state.user,
+            };
 };
 
 const connector = connect(mapState);
@@ -36,6 +36,10 @@ const GoalCard: React.FC<Props> = ({ name }) => {
   const [newName, setNewName] = useState<nameTypes>({ name: name });
   const [displayName, setDisplayName] = useState<string>(name);
 
+  useEffect(() => {
+    setDisplayName(name);
+  }, [name]);
+
   const bolden = (e: any) => {
     e.target.style.opacity = 1;
     e.target.style.cursor = "pointer";
@@ -46,7 +50,7 @@ const GoalCard: React.FC<Props> = ({ name }) => {
 
   const handleChange = (e: any) => {
     setNewName({
-        name: e.target.value
+      name: e.target.value,
     });
   };
 
@@ -56,16 +60,15 @@ const GoalCard: React.FC<Props> = ({ name }) => {
       onMouseLeave={() => setShowPen(false)}
       className="goal-card"
     >
-        {canEdit ? (
-          <div>
-            <input value={newName.name} name="name" onChange={handleChange} />
-            <button>Save</button>
-          </div>
-        ) : (
-            <span>{displayName}</span>
-        )
-    }
-      
+      {canEdit ? (
+        <div>
+          <input value={newName.name} name="name" onChange={handleChange} />
+          <button>Save</button>
+        </div>
+      ) : (
+        <span>{displayName}</span>
+      )}
+
       {showPen && (
         <div className="goal-buttons">
           <CreateTwoToneIcon

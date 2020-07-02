@@ -88,7 +88,7 @@ export const addGoal = (userId: number, catId: string, goal: object) => (dispatc
     axiosWithAuth()
         .post(`/api/${userId}/goals/${catId}/add`, goal)
         .then(res => {
-            dispatch({ type: ADD_GOAL, payload: res.data.goals})
+            dispatch({ type: ADD_GOAL, payload: res.data})
         })
         .catch(err => {
             console.log(err);

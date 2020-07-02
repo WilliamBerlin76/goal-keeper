@@ -39,7 +39,7 @@ interface GoalProps extends RouteComponentProps<RouterProps>{};
 type Props = ConnectedProps<typeof connector> & RouterProps & GoalProps;
 
 const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
-
+    console.log('GOALS', goals)
     useEffect(() => {
         getGoals(user.id, match.params.catId)
     }, [getGoals, user.id, match.params.catId]);

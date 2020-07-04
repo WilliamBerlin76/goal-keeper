@@ -30,7 +30,7 @@ type Props = ConnectedProps<typeof connector> & {
 
 interface nameTypes {
   name: string;
-}
+};
 
 const CatCard: React.FC<Props> = ({
   catId,

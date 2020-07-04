@@ -58,8 +58,9 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal }) => {
   };
 
   const handleDelete = (e: any) => {
-    deleteGoal(user.id, goalId)
-  }
+    deleteGoal(user.id, goalId);
+    setCanDelete(false);
+  };
 
   return (
     <>

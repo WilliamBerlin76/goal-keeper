@@ -104,5 +104,16 @@ export const getGoals = (userId: number, catId: string) => (dispatch: any) => {
         .catch(err => {
             console.log(err)
         })
+};
+
+export const deleteGoal = (userId: number, goalId: number) => (dispatch: any) => {
+    axiosWithAuth()
+        .delete(`/api/${userId}/goals/${goalId}/remove`)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 

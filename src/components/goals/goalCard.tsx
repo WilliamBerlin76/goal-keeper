@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 import CreateTwoToneIcon from "@material-ui/icons/CreateTwoTone";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { deleteGoal } from "../../actions/index";
 
 import { connect, ConnectedProps } from "react-redux";
 
@@ -18,7 +19,9 @@ const mapState = (state: {
             };
 };
 
-const connector = connect(mapState);
+const mapDispatch = { deleteGoal }
+
+const connector = connect(mapState, mapDispatch);
 
 type Props = ConnectedProps<typeof connector> & {
   name: string;
@@ -29,7 +32,7 @@ interface nameTypes {
   name: string;
 }
 
-const GoalCard: React.FC<Props> = ({ name }) => {
+const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal }) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const [canDelete, setCanDelete] = useState<boolean>(false);
   const [showPen, setShowPen] = useState<boolean>(false);
@@ -54,7 +57,12 @@ const GoalCard: React.FC<Props> = ({ name }) => {
     });
   };
 
+  const handleDelete = (e: any) => {
+    deleteGoal(user.id, goalId)
+  }
+
   return (
+    <>
     <div
       onMouseOver={() => setShowPen(true)}
       onMouseLeave={() => setShowPen(false)}
@@ -88,6 +96,14 @@ const GoalCard: React.FC<Props> = ({ name }) => {
         </div>
       )}
     </div>
+    {canDelete && (
+      <div>
+        <p>Are you sure you want to delete this goal?</p>
+        <button onClick={handleDelete}>Yes</button>
+        <button onClick={() => setCanDelete(false)}>No</button>
+      </div>
+    )}
+    </>
   );
 };
 

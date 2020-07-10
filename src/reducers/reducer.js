@@ -14,14 +14,8 @@ let localUser = localStorage.getItem('persist-user');
 let sessionUser = sessionStorage.getItem('persist-user');
 
 const initialState = {
-    user: {
-        id: localUser ? JSON.parse(localUser).id : 
-            sessionUser ? JSON.parse(sessionUser).id : null,
-        username: localUser ? JSON.parse(localUser).username : 
-            sessionUser ? JSON.parse(sessionUser).username : null,
-        email: localUser ? JSON.parse(localUser).email : 
-            sessionUser ? JSON.parse(sessionUser).email : null
-    },
+    user: localUser ? JSON.parse(localUser) : 
+            sessionUser ? JSON.parse(sessionUser) : null,
     categories: [],
     goals: []
 };

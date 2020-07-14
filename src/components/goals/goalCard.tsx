@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import CreateTwoToneIcon from "@material-ui/icons/CreateTwoTone";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { deleteGoal } from "../../actions/index";
+import { deleteGoal, editGoal } from "../../actions/index";
 
 import { connect, ConnectedProps } from "react-redux";
 
@@ -19,7 +19,7 @@ const mapState = (state: {
             };
 };
 
-const mapDispatch = { deleteGoal }
+const mapDispatch = { deleteGoal, editGoal }
 
 const connector = connect(mapState, mapDispatch);
 
@@ -32,7 +32,7 @@ interface nameTypes {
   name: string;
 }
 
-const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal }) => {
+const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal, editGoal }) => {
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const [canDelete, setCanDelete] = useState<boolean>(false);
   const [showPen, setShowPen] = useState<boolean>(false);
@@ -62,6 +62,10 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal }) => {
     setCanDelete(false);
   };
 
+  const handleEdit = (e: any) => {
+    editGoal(user.id, goalId, newName)
+    setCanEdit(false);
+  }
   return (
     <>
     <div
@@ -72,7 +76,7 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal }) => {
       {canEdit ? (
         <div>
           <input value={newName.name} name="name" onChange={handleChange} />
-          <button>Save</button>
+          <button onClick={handleEdit}>Save</button>
         </div>
       ) : (
         <span>{displayName}</span>

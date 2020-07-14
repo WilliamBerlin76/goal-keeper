@@ -12,6 +12,7 @@ export const DELETE_CAT = 'DELETE_CAT';
 export const ADD_GOAL = 'ADD_GOAL';
 export const SET_GOALS = 'SET_GOALS';
 export const DELETE_GOAL = 'DELETE_GOAL';
+export const EDIT_GOAL = 'EDIT_GOAL'
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
 
@@ -118,11 +119,11 @@ export const deleteGoal = (userId: number, goalId: number) => (dispatch: any) =>
         });
 };
 
-export const editGoal = (userId: number, goalId: number, change: object) => (dispatch: any) => {
+export const editGoal = (userId: number, goalId: number, change: {name: string}) => (dispatch: any) => {
     axiosWithAuth()
         .put(`/api/${userId}/goals/${goalId}/update`, change)
         .then(res => {
-            console.log(res);
+            dispatch({ type: EDIT_GOAL, payload: {id: goalId, change: change.name}})
         })
         .catch(err => {
             console.log(err)

@@ -7,7 +7,8 @@ import {
     AUTH_ERR,
     ADD_GOAL,
     SET_GOALS,
-    DELETE_GOAL
+    DELETE_GOAL,
+    EDIT_GOAL  
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -93,6 +94,22 @@ const reducer = (state = initialState, action) => {
                 goals: {
                     ...state.goals,
                     goals: state.goals.goals.filter(goal => goal.id !== action.payload)
+                }
+            }
+        case EDIT_GOAL:
+            console.log('PAYLOAD', action.payload)
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                goals: {
+                    ...state.goals,
+                    goals: state.goals.goals.map(goal => {
+                        if (goal.id === action.payload.id){
+                            goal.name = action.payload.change;
+                        }
+                        return goal;
+                    })
                 }
             }
         default: return state

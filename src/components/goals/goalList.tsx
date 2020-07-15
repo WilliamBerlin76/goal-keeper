@@ -50,6 +50,7 @@ const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
             <GoalForm 
                 catId={match.params.catId}
             />
+            <p>(click a goal to view steps)</p>
             {goals.goals && (
                 goals.goals.map(goal => {
                     return (

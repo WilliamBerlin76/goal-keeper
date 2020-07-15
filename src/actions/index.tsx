@@ -129,4 +129,3 @@ export const editGoal = (userId: number, goalId: number, change: {name: string})
             console.log(err)
         });
 };
-

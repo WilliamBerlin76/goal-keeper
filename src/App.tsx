@@ -6,6 +6,7 @@ import Register from './components/auth/authForm';
 import Nav from './components/nav/nav';
 import Dashboard from './components/dashboard/dashboard';
 import GoalList from './components/goals/goalList';
+import StepList from './components/steps/steplist';
 
 import PrivateRoute from './utils/PrivateRoute';
 
@@ -26,6 +27,10 @@ const App: React.FC = () => {
         <PrivateRoute 
           path='/:catId/goals' 
           component={GoalList}
+        />
+        <PrivateRoute
+          path='/:goalId/steps'
+          component={StepList}
         />
       </Switch>
     </>

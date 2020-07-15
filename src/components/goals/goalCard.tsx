@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import CreateTwoToneIcon from "@material-ui/icons/CreateTwoTone";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -38,6 +38,7 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal, editGoal })
   const [showPen, setShowPen] = useState<boolean>(false);
   const [newName, setNewName] = useState<nameTypes>({ name: name });
   const [displayName, setDisplayName] = useState<string>(name);
+  const history = useHistory();
 
   useEffect(() => {
     setDisplayName(name);
@@ -65,7 +66,12 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal, editGoal })
   const handleEdit = (e: any) => {
     editGoal(user.id, goalId, newName)
     setCanEdit(false);
-  }
+  };
+
+  const gotoSteps = (e: any) => {
+    history.push(`/${goalId}/steps`)
+  };
+
   return (
     <>
     <div
@@ -79,7 +85,7 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal, editGoal })
           <button onClick={handleEdit}>Save</button>
         </div>
       ) : (
-        <span>{displayName}</span>
+        <span onClick={gotoSteps}>{displayName}</span>
       )}
 
       {showPen && (

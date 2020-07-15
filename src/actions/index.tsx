@@ -129,3 +129,14 @@ export const editGoal = (userId: number, goalId: number, change: {name: string})
             console.log(err)
         });
 };
+
+export const getSteps = (userId: number, goalId: string) => (dispatch: any) => {
+    axiosWithAuth()
+        .get(`/api/${userId}/steps/${goalId}`)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        });
+};

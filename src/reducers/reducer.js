@@ -8,7 +8,8 @@ import {
     ADD_GOAL,
     SET_GOALS,
     DELETE_GOAL,
-    EDIT_GOAL  
+    EDIT_GOAL,
+    GET_STEPS  
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -18,8 +19,10 @@ const initialState = {
     user: localUser ? JSON.parse(localUser) : 
             sessionUser ? JSON.parse(sessionUser) : null,
     categories: [],
-    goals: []
+    goals: {},
+    stepList: {}
 };
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_START:
@@ -85,7 +88,7 @@ const reducer = (state = initialState, action) => {
                 isFetching: false,
                 error: '',
                 goals: action.payload
-            }
+            };
         case DELETE_GOAL:
             return {
                 ...state,
@@ -95,9 +98,8 @@ const reducer = (state = initialState, action) => {
                     ...state.goals,
                     goals: state.goals.goals.filter(goal => goal.id !== action.payload)
                 }
-            }
+            };
         case EDIT_GOAL:
-            console.log('PAYLOAD', action.payload)
             return {
                 ...state,
                 isFetching: false,
@@ -111,6 +113,13 @@ const reducer = (state = initialState, action) => {
                         return goal;
                     })
                 }
+            };
+        case GET_STEPS:
+            return{
+                ...state,
+                isFetching: false,
+                error: '',
+                stepList: action.payload
             }
         default: return state
     };

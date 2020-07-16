@@ -12,7 +12,11 @@ export const DELETE_CAT = 'DELETE_CAT';
 export const ADD_GOAL = 'ADD_GOAL';
 export const SET_GOALS = 'SET_GOALS';
 export const DELETE_GOAL = 'DELETE_GOAL';
-export const EDIT_GOAL = 'EDIT_GOAL'
+export const EDIT_GOAL = 'EDIT_GOAL';
+
+export const GET_STEPS = 'GET_STEPS';
+export const ADD_STEP = 'ADD_STEP';
+
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
 
@@ -133,6 +137,17 @@ export const editGoal = (userId: number, goalId: number, change: {name: string})
 export const getSteps = (userId: number, goalId: string) => (dispatch: any) => {
     axiosWithAuth()
         .get(`/api/${userId}/steps/${goalId}`)
+        .then(res => {
+            dispatch({ type: GET_STEPS, payload: res.data });
+        })
+        .catch(err => {
+            console.log(err)
+        });
+};
+
+export const addStep = (userId: number, goalId: string, step: {name: string, stepNum: number}) => (dispatch: any) => {
+    axiosWithAuth()
+        .post(`/api/${userId}/steps/${goalId}`, step)
         .then(res => {
             console.log(res)
         })

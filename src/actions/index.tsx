@@ -149,7 +149,7 @@ export const addStep = (userId: number, goalId: string, step: {name: string, ste
     axiosWithAuth()
         .post(`/api/${userId}/steps/${goalId}`, step)
         .then(res => {
-            console.log(res)
+            dispatch({ type: ADD_STEP, payload: res.data })
         })
         .catch(err => {
             console.log(err)

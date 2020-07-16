@@ -14,9 +14,9 @@ const mapState = (state: {
                     stepList: {
                         goal: string
                         steps: Array<{
-                            id: number;
+                            step_id: number;
                             name: string;
-                            stepNum: number;
+                            step_num: number;
                         }>
                     }
 
@@ -48,14 +48,14 @@ const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
     console.log(stepList)
     return (
         <>
-            <h2>Steps go here</h2>
+            <h2>Goal: {stepList.goal}</h2>
             <StepForm
                 goalId={match.params.goalId}
             />
             {stepList.steps && (
                 stepList.steps.map(step => {
                     return(
-                        <p>{step.name}</p>
+                        <p key={step.step_id}>{step.step_num}. {step.name}</p>
                     )
                 })
             )}

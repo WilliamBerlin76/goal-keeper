@@ -46,7 +46,7 @@ const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
     
     return (
         <>  
-            <h2>Goals: {goals.category}</h2>
+            <h2>Category: {goals.category}</h2>
             <GoalForm 
                 catId={match.params.catId}
             />

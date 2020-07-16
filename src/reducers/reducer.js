@@ -9,7 +9,8 @@ import {
     SET_GOALS,
     DELETE_GOAL,
     EDIT_GOAL,
-    GET_STEPS  
+    GET_STEPS,
+    ADD_STEP  
 } from '../actions'
 
 let localUser = localStorage.getItem('persist-user');
@@ -115,11 +116,21 @@ const reducer = (state = initialState, action) => {
                 }
             };
         case GET_STEPS:
-            return{
+            return {
                 ...state,
                 isFetching: false,
                 error: '',
                 stepList: action.payload
+            };
+        case ADD_STEP:
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                stepList: {
+                    ...state.stepList,
+                    steps: action.payload.steps
+                }
             }
         default: return state
     };

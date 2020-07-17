@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 import CreateTwoToneIcon from "@material-ui/icons/CreateTwoTone";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -41,7 +41,7 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
     const [showPen, setShowPen] = useState<boolean>(false);
     const [newStep, setStep] = useState<nameTypes>({ name, stepNum });
     const [displayStep, setDisplayStep] = useState<nameTypes>({ name, stepNum });
-    const history = useHistory();
+    // const history = useHistory();
 
     useEffect(() => {
         setDisplayStep({

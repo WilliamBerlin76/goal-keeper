@@ -5,6 +5,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { getSteps } from '../../actions/index';
 
 import StepForm from './stepForm';
+import StepCard from './stepCard';
 
 const mapState = (state: {
                     user: {
@@ -55,7 +56,13 @@ const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
             {stepList.steps && (
                 stepList.steps.map(step => {
                     return(
-                        <p key={step.step_id}>{step.step_num}. {step.name}</p>
+                        // <p key={step.step_id}>{step.step_num}. {step.name}</p>
+                        <StepCard 
+                            key={step.step_id}
+                            stepId={step.step_id}
+                            name={step.name}
+                            stepNum={step.step_num}
+                        />
                     )
                 })
             )}

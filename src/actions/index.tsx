@@ -22,7 +22,7 @@ export const EDIT_STEP = 'EDIT_STEP';
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
 
-    await axios.post(`http://localhost:5000/api/auth/${method}`, userInfo)
+    await axios.post(`https://node-goals.herokuapp.com/api/auth/${method}`, userInfo)
         .then(res => {
             let user;
             method === 'login' ? user = res.data.user : user = res.data.newUser;

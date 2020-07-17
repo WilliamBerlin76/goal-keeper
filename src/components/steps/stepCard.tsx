@@ -6,6 +6,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect, ConnectedProps } from "react-redux";
 
+import { removeStep } from '../../actions/index';
+
 import "./steps.scss";
 
 const mapState = (state: {
@@ -18,7 +20,9 @@ const mapState = (state: {
                 };
 };
 
-const connector = connect(mapState);
+const mapDispatch = { removeStep };
+
+const connector = connect(mapState, mapDispatch);
 
 type Props = ConnectedProps<typeof connector> & {
     stepId: number;
@@ -31,7 +35,7 @@ interface nameTypes {
     stepNum: number
 };
 
-const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum }) => {
+const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep }) => {
     const [canEdit, setCanEdit] = useState<boolean>(false);
     const [canDelete, setCanDelete] = useState<boolean>(false);
     const [showPen, setShowPen] = useState<boolean>(false);
@@ -55,6 +59,18 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum }) => {
         e.target.style.opacity = 0.3;
     };
 
+    const editStepChange = (e: any) => {
+        setStep({
+            ...newStep,
+            [e.target.name]: e.target.value
+        })
+    };
+
+    const handleDelete = (e: any) => {
+        removeStep(user.id, stepId);
+        setCanDelete(false)
+    };
+
     return (
         <>
         <div 
@@ -64,8 +80,8 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum }) => {
         >
             {canEdit ? (
                 <div>
-                    <input value={newStep.stepNum} name="stepNum"/>
-                    <input value={newStep.name} name="name"/>
+                    <input type='number' value={newStep.stepNum} name="stepNum" onChange={editStepChange}/>
+                    <input value={newStep.name} name="name" onChange={editStepChange}/>
                     <button>Save</button>
                 </div>
                 ) : (
@@ -89,8 +105,14 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum }) => {
                     />
                 </div>
             )}
-
         </div>
+        {canDelete && (
+      <div>
+        <p>Are you sure you want to delete this step?</p>
+        <button onClick={handleDelete}>Yes</button>
+        <button onClick={() => setCanDelete(false)}>No</button>
+      </div>
+    )}
         </>
     )
 };

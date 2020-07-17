@@ -41,6 +41,7 @@ const StepForm: React.FC<Props> = ({user, goalId, addStep}) => {
             />
             <input 
                 type='number'
+                placeholder='step number'
                 name='stepNum'
                 onChange={e => setStep({
                     ...step,

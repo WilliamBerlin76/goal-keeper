@@ -10,8 +10,9 @@ import {
     DELETE_GOAL,
     EDIT_GOAL,
     GET_STEPS,
-    ADD_STEP  
-} from '../actions'
+    ADD_STEP,
+    DELETE_STEP  
+} from '../actions';
 
 let localUser = localStorage.getItem('persist-user');
 let sessionUser = sessionStorage.getItem('persist-user');
@@ -131,8 +132,18 @@ const reducer = (state = initialState, action) => {
                     ...state.stepList,
                     steps: action.payload.steps
                 }
-            }
-        default: return state
+            };
+        case DELETE_STEP:
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                stepList: {
+                    ...state.stepList,
+                    steps: state.stepList.steps.filter(step => step.step_id !== action.payload)
+                }
+            };
+        default: return state;
     };
 };
 

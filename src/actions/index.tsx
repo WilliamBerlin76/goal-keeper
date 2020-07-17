@@ -16,6 +16,7 @@ export const EDIT_GOAL = 'EDIT_GOAL';
 
 export const GET_STEPS = 'GET_STEPS';
 export const ADD_STEP = 'ADD_STEP';
+export const DELETE_STEP = 'DELETE_STEP';
 
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
@@ -149,7 +150,18 @@ export const addStep = (userId: number, goalId: string, step: {name: string, ste
     axiosWithAuth()
         .post(`/api/${userId}/steps/${goalId}`, step)
         .then(res => {
-            dispatch({ type: ADD_STEP, payload: res.data })
+            dispatch({ type: ADD_STEP, payload: res.data });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+export const removeStep = (userId: number, stepId: number) => (dispatch: any) => {
+    axiosWithAuth()
+        .delete(`/api/${userId}/steps/${stepId}/remove`)
+        .then(res => {
+            dispatch({ type: DELETE_STEP, payload: stepId})
         })
         .catch(err => {
             console.log(err)

@@ -17,6 +17,7 @@ export const EDIT_GOAL = 'EDIT_GOAL';
 export const GET_STEPS = 'GET_STEPS';
 export const ADD_STEP = 'ADD_STEP';
 export const DELETE_STEP = 'DELETE_STEP';
+export const EDIT_STEP = 'EDIT_STEP';
 
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
@@ -165,5 +166,16 @@ export const removeStep = (userId: number, stepId: number) => (dispatch: any) =>
         })
         .catch(err => {
             console.log(err)
+        });
+};
+
+export const editStep = (userId: number, stepId: number, changes: object) => (dispatch: any) => {
+    axiosWithAuth()
+        .put(`/api/${userId}/steps/${stepId}/update`, changes)
+        .then(res => {
+            dispatch({ type: EDIT_STEP, payload: {stepId, changes}})
+        })
+        .catch(err => {
+            console.log(err);
         });
 };

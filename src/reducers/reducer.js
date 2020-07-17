@@ -11,7 +11,8 @@ import {
     EDIT_GOAL,
     GET_STEPS,
     ADD_STEP,
-    DELETE_STEP  
+    DELETE_STEP,
+    EDIT_STEP  
 } from '../actions';
 
 let localUser = localStorage.getItem('persist-user');
@@ -143,6 +144,38 @@ const reducer = (state = initialState, action) => {
                     steps: state.stepList.steps.filter(step => step.step_id !== action.payload)
                 }
             };
+        case EDIT_STEP:
+            const compareSteps = (a, b) => {
+                const stepA = a.step_num;
+                const stepB = b.step_num;
+
+                let comparison = 0;
+                if (stepA > stepB){
+                    comparison = 1
+                } else if (stepA < stepB){
+                    comparison = -1
+                };
+                return comparison;
+            };
+            
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                stepList: {
+                    ...state.stepList,
+                    steps: state.stepList.steps.map(step => {
+                        if (step.step_id === action.payload.stepId){
+                            step = {
+                                ...step,
+                                name: action.payload.changes.name,
+                                step_num: action.payload.changes.stepNum
+                            }
+                        }
+                        return step;
+                    }).sort(compareSteps)
+                }
+            }
         default: return state;
     };
 };

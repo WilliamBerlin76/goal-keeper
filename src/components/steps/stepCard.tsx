@@ -6,7 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import { connect, ConnectedProps } from "react-redux";
 
-import { removeStep } from '../../actions/index';
+import { removeStep, editStep } from '../../actions/index';
 
 import "./steps.scss";
 
@@ -20,7 +20,7 @@ const mapState = (state: {
                 };
 };
 
-const mapDispatch = { removeStep };
+const mapDispatch = { removeStep, editStep };
 
 const connector = connect(mapState, mapDispatch);
 
@@ -35,7 +35,7 @@ interface nameTypes {
     stepNum: number
 };
 
-const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep }) => {
+const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, editStep }) => {
     const [canEdit, setCanEdit] = useState<boolean>(false);
     const [canDelete, setCanDelete] = useState<boolean>(false);
     const [showPen, setShowPen] = useState<boolean>(false);
@@ -71,6 +71,11 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep }) 
         setCanDelete(false)
     };
 
+    const handleEdit = (e: any) => {
+        editStep(user.id, stepId, newStep);
+        setCanEdit(false);
+    };
+
     return (
         <>
         <div 
@@ -82,7 +87,7 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep }) 
                 <div>
                     <input type='number' value={newStep.stepNum} name="stepNum" onChange={editStepChange}/>
                     <input value={newStep.name} name="name" onChange={editStepChange}/>
-                    <button>Save</button>
+                    <button onClick={handleEdit}>Save</button>
                 </div>
                 ) : (
                 <span>{displayStep.stepNum}. {displayStep.name}</span>

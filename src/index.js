@@ -7,14 +7,14 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reducer from './reducers/reducer';
 
 const store = createStore(
   //place reducers here
   reducer,
-  applyMiddleware(thunk, logger)
+  applyMiddleware(thunk)
 );
 
 ReactDOM.render(

@@ -46,7 +46,6 @@ const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
         getSteps(user.id, match.params.goalId)
     }, [getSteps, user.id, match.params.goalId]);
 
-    console.log(stepList)
     return (
         <>
             <h2>Goal: {stepList.goal}</h2>

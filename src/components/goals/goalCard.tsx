@@ -15,7 +15,7 @@ const mapState = (state: {
             };
           }) => {
             return {
-              user: state.user,
+              user: state.user
             };
 };
 

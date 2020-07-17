@@ -24,7 +24,7 @@ const mapState = (state: {
             return ({
                 user: state.user,
                 stepList: state.stepList
-            })
+            });
 };
 
 const mapDispatch = { getSteps }
@@ -33,7 +33,7 @@ const connector = connect(mapState, mapDispatch);
 
 interface RouterProps {
     goalId: string
-}
+};
 
 interface StepProps extends RouteComponentProps<RouterProps>{};
 
@@ -63,4 +63,4 @@ const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
     );
 };
 
-export default connector(StepList)
+export default connector(StepList);

@@ -1,0 +1,10 @@
+.step-card{
+    width: 25%;
+    min-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    &:hover{
+        background: #e6e6e6;
+        cursor: pointer
+    }
+}

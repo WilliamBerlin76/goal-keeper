@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import { authenticate, editGoal } from '../../actions/index';
+import { authenticate } from '../../actions/index';
 
 import './authForm.scss';
 
@@ -56,7 +56,7 @@ const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
                     name='username'
                     onChange={handleChange}
                 />
-                {type === 'register' &&
+                {type === 'Register' &&
                     <input
                         placeholder='Email'
                         type='text'
@@ -82,8 +82,7 @@ const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
                     <p className='auth-err'>{error}</p>
                 )}
                 <button className='auth-submit'>{type}</button>
-            </form>
-            
+            </form>  
         </section>
     );
 };

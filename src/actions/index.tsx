@@ -3,6 +3,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const USER_START = 'USER_START';
 export const SET_USER = 'SET_USER';
+export const LOG_OUT = 'LOG_OUT';
 export const AUTH_ERR = 'AUTH_ERR';
 
 export const SET_CAT = 'SET_CAT';
@@ -21,9 +22,9 @@ export const EDIT_STEP = 'EDIT_STEP';
 
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
     dispatch({ type: USER_START });
-
+    method = method.toLowerCase();
     await axios.post(`https://node-goals.herokuapp.com/api/auth/${method}`, userInfo)
-        .then(res => {
+        .then(res => { 
             let user;
             method === 'login' ? user = res.data.user : user = res.data.newUser;
             sessionStorage.setItem('token', res.data.token);
@@ -47,6 +48,12 @@ export const authenticate = (userInfo: object, method: string, remember: boolean
             dispatch({ type: AUTH_ERR, payload: err.response.data.message})
         });
 }; 
+
+export const logOut = () => (dispatch: any) => {
+    localStorage.clear();
+    sessionStorage.clear();
+    dispatch({ type: LOG_OUT, payload: null })
+};
 
 export const addCat = (userId: number, category: object) => (dispatch: any) => {
     axiosWithAuth()

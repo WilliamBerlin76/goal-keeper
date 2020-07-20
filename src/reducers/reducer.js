@@ -12,7 +12,8 @@ import {
     GET_STEPS,
     ADD_STEP,
     DELETE_STEP,
-    EDIT_STEP  
+    EDIT_STEP,
+    LOG_OUT
 } from '../actions';
 
 let localUser = localStorage.getItem('persist-user');
@@ -45,6 +46,12 @@ const reducer = (state = initialState, action) => {
                     email: action.payload.email
                 }
             };
+        case LOG_OUT:
+            return {
+                ...state,
+                error: '',
+                user: null
+            }
         case AUTH_ERR:
             return{
                 ...state,

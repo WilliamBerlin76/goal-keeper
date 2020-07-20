@@ -78,12 +78,11 @@ const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
                     />
                     <label htmlFor='remember'>Remember me?</label>
                 </div>
-                
-                <button>{type}</button>
+                {error && (
+                    <p className='auth-err'>{error}</p>
+                )}
+                <button className='auth-submit'>{type}</button>
             </form>
-            {error && (
-                <p>{error}</p>
-            )}
             
         </section>
     );

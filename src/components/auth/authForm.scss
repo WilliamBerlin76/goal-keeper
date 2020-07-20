@@ -1,0 +1,33 @@
+.auth-form{
+    margin: 6% auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+
+    input{
+        margin: 15px 0;
+        height: 30px;
+        font-size: 1.13rem;
+        border-radius: 5px;
+        border: solid 1px grey;
+        &:focus{
+            outline: transparent;
+        }
+    }
+    .remember-check{
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        #remember{
+            cursor: pointer;
+            margin-right: 5px
+        }
+        label{
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+    }
+}

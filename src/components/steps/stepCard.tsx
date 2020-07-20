@@ -112,12 +112,12 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
             )}
         </div>
         {canDelete && (
-      <div>
-        <p>Are you sure you want to delete this step?</p>
-        <button onClick={handleDelete}>Yes</button>
-        <button onClick={() => setCanDelete(false)}>No</button>
-      </div>
-    )}
+            <div>
+                <p>Are you sure you want to delete this step?</p>
+                <button onClick={handleDelete}>Yes</button>
+                <button onClick={() => setCanDelete(false)}>No</button>
+            </div>
+        )}
         </>
     )
 };

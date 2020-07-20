@@ -17,11 +17,11 @@ const App: React.FC = () => {
       <Switch>
         <Route 
           path='/register'
-          render={props => <Register type='register' {...props}/>}
+          render={props => <Register type='Register' {...props}/>}
         />
         <Route 
           path='/login'
-          render={props => <Register type='login' {...props}/>}
+          render={props => <Register type='Login' {...props}/>}
         />
         <PrivateRoute path='/dashboard' component={Dashboard} />
         <PrivateRoute 

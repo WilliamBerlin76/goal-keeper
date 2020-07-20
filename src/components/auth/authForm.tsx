@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import { authenticate } from '../../actions/index';
+import { authenticate, editGoal } from '../../actions/index';
 
+import './authForm.scss';
 
 const mapState = (state: { user: object; error: string; }) => {
     return{
@@ -35,15 +36,20 @@ const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
         });
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
         await authenticate(user, type, remember);
-        history.push('/dashboard')
+        history.push('/dashboard');
     };
 
     return (
-        <>
-            <h2>{type}</h2>
-            <form>
+        <section className='auth-form-container'>
+            
+            <form
+                onSubmit={handleSubmit}
+                className='auth-form'
+            >
+                <h2>{type}</h2>
                 <input
                     placeholder='Username'
                     type='text'
@@ -64,17 +70,21 @@ const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
                     name='password'
                     onChange={handleChange}
                 />
-                Remember me?
-                <input 
-                    type="checkbox"
-                    onChange={() => setRemember(!remember)}
-                />
+                <div className='remember-check'>
+                    <input 
+                        id='remember'
+                        type="checkbox"
+                        onChange={() => setRemember(!remember)}
+                    />
+                    <label htmlFor='remember'>Remember me?</label>
+                </div>
+                {error && (
+                    <p className='auth-err'>{error}</p>
+                )}
+                <button className='auth-submit'>{type}</button>
             </form>
-            {error && (
-                <p>{error}</p>
-            )}
-            <button onClick={handleSubmit}>{type}</button>
-        </>
+            
+        </section>
     );
 };
 

@@ -42,13 +42,13 @@ const Nav: React.FC<Props> = ({ user, logOut }) => {
                 <ClearRoundedIcon 
                     fontSize="large"
                     onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px'}}
+                    style={{ position: 'fixed', right: '5px', top: '5px', cursor: 'pointer'}}
                 />
                 :
                 <MenuRoundedIcon
                     fontSize="large"
                     onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px'}}
+                    style={{ position: 'fixed', right: '5px', top: '5px', cursor: 'pointer'}}
                 />
             }
             

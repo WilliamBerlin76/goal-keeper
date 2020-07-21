@@ -45,24 +45,36 @@ const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
     }, [getGoals, user.id, match.params.catId]);
     
     return (
-        <>  
+        <section className='main-comp-section'>  
             <h2>Category: {goals.category}</h2>
+
+            <p>
+                Here are your goals for the 
+                category: {goals.category}.
+                You can type and enter in the
+                form below to add a goal.
+            </p>
             <GoalForm 
                 catId={match.params.catId}
             />
-            <p>(click a goal to view steps)</p>
             {goals.goals && (
-                goals.goals.map(goal => {
-                    return (
-                        <GoalCard
-                            key={goal.id}
-                            goalId={goal.id} 
-                            name={goal.name}
-                        />
-                    )
-                })
+                goals.goals.length === 0 ? 
+                    <p>You don't have any goals in this category!</p>
+                :
+                <>
+                    <p>(click a goal to view steps)</p>
+                    {goals.goals.map(goal => {
+                        return (
+                            <GoalCard
+                                key={goal.id}
+                                goalId={goal.id} 
+                                name={goal.name}
+                            />
+                        )
+                    })}
+                </>
             )}
-        </>
+        </section>
     );
 };
 

@@ -26,6 +26,7 @@ const GoalForm: React.FC<Props> = ({user, catId, addGoal}) => {
     const [goal, setGoal] = useState<object>({})
 
     const handleSubmit = (e: any) => {
+        e.preventDefault();
         addGoal(user.id, catId, goal);
     };
 

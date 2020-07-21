@@ -26,11 +26,12 @@ const StepForm: React.FC<Props> = ({user, goalId, addStep}) => {
     const [step, setStep] = useState<any>({})
 
     const handleSubmit = (e: any) => {
+        e.preventDefault();
         addStep(user.id, goalId, step);
     };
 
     return(
-        <>
+        <form className='add-forms'>
             <input 
                 placeholder='step name'
                 name='name'
@@ -49,7 +50,7 @@ const StepForm: React.FC<Props> = ({user, goalId, addStep}) => {
                 })}
             />
             <button onClick={handleSubmit}>Add Step</button>
-        </>
+        </form>
     );
 };
 

@@ -25,7 +25,8 @@ const CatForm: React.FC<Props> = ({user, addCat}) => {
     const [category, setCategory] = useState<object>({});
 
     const handleSubmit = (e: any)=> {
-        addCat(user.id, category)
+        e.preventDefault();
+        addCat(user.id, category);
     };
 
     return (

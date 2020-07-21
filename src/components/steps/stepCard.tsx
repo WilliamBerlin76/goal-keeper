@@ -79,12 +79,12 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
     return (
         <>
         <div 
-            className='step-card'
+            className='cards'
             onMouseOver={() => setShowPen(true)}
             onMouseLeave={() => setShowPen(false)}
         >
             {canEdit ? (
-                <div>
+                <div className='edit-form'>
                     <input type='number' value={newStep.stepNum} name="stepNum" onChange={editStepChange}/>
                     <input value={newStep.name} name="name" onChange={editStepChange}/>
                     <button onClick={handleEdit}>Save</button>
@@ -95,14 +95,12 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
             {showPen && (
                 <div className="goal-buttons">
                     <CreateTwoToneIcon
-                        fontSize="small"
                         opacity=".3"
                         onMouseOver={bolden}
                         onMouseLeave={grey}
                         onClick={() => setCanEdit(!canEdit)}
                     />
                     <DeleteIcon
-                        fontSize="small"
                         opacity=".3"
                         onMouseOver={bolden}
                         onMouseLeave={grey}
@@ -112,7 +110,7 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
             )}
         </div>
         {canDelete && (
-            <div>
+            <div className='delete-confirm'>
                 <p>Are you sure you want to delete this step?</p>
                 <button onClick={handleDelete}>Yes</button>
                 <button onClick={() => setCanDelete(false)}>No</button>

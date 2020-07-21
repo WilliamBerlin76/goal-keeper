@@ -47,12 +47,21 @@ const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
     }, [getSteps, user.id, match.params.goalId]);
 
     return (
-        <>
+        <div className='main-comp-section'>
             <h2>Goal: {stepList.goal}</h2>
+            <p>
+                Below are the steps you will to achieve
+                to complete your goal: {stepList.goal}.
+                You can add steps to this goal with the
+                form below.
+            </p>
             <StepForm
                 goalId={match.params.goalId}
             />
             {stepList.steps && (
+                stepList.steps.length === 0 ?
+                    <p>This goal doesn't have any steps yet!</p>
+                :
                 stepList.steps.map(step => {
                     return(
                         <StepCard 
@@ -64,7 +73,7 @@ const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
                     )
                 })
             )}
-        </>
+        </div>
     );
 };
 

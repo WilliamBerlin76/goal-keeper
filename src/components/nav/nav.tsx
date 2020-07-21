@@ -11,6 +11,7 @@ import './nav.scss';
 const mapState = (state: {
                     user: {
                         id: number;
+                        username: string
                     }
                 }) => {
                 return {
@@ -40,19 +41,22 @@ const Nav: React.FC<Props> = ({ user, logOut }) => {
         <>
         <div className='nav'>  
             <h1 id='title'>Goal-Keeper</h1>
-            {menuOpen ?
-                <ClearRoundedIcon 
-                    fontSize="large"
-                    onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px', marginRight: '13px'}}
-                />
-                :
-                <MenuRoundedIcon
-                    fontSize="large"
-                    onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px', marginRight: '13px'}}
-                />
-            }
+            <div className='right-side'>
+                <span id='username'>{user.username}</span>
+                {menuOpen ?
+                    <ClearRoundedIcon 
+                        fontSize="large"
+                        onClick={handleClick}
+                        style={{ marginRight: '13px', cursor: 'pointer' }}
+                    />
+                    :
+                    <MenuRoundedIcon
+                        fontSize="large"
+                        onClick={handleClick}
+                        style={{ marginRight: '13px', cursor: 'pointer' }}
+                    />
+                }
+            </div>
             
         </div>
         {menuOpen && (

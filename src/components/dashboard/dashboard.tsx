@@ -6,6 +6,8 @@ import CatForm from './catForm';
 import CatCard from './catCard';
 import { getCats } from '../../actions/index';
 
+import "./dashboard.scss";
+
 const mapState = (state: {
                     user: {
                         id: number;
@@ -34,8 +36,13 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
     }, [getCats, user.id]);
 
     return (
-        <>
-            <h2>Hello {user.username}</h2>
+        <section className='dash-section'>
+            <h2>Your Categories</h2>
+            <p>
+                This is where you can categorize your goals. 
+                Here you can add a category name, and click on it to 
+                view it's goal page.
+            </p>
             <CatForm />
             <h3>categories</h3>
             <p>(Click a category to view your goals)</p>
@@ -48,7 +55,7 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
                 />
                 );
             })}
-        </>
+        </section>
     );
 };
 

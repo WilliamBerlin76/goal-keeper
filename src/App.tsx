@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
-import './App.css';
+import './App.scss';
 
 import Register from './components/auth/authForm';
 import Nav from './components/nav/nav';
@@ -23,15 +23,19 @@ const App: React.FC = () => {
           path='/login'
           render={props => <Register type='Login' {...props}/>}
         />
-        <PrivateRoute path='/dashboard' component={Dashboard} />
-        <PrivateRoute 
-          path='/:catId/goals' 
-          component={GoalList}
-        />
-        <PrivateRoute
-          path='/:goalId/steps'
-          component={StepList}
-        />
+        
+        <section className='main-comps'>
+          <PrivateRoute path='/dashboard' component={Dashboard} />
+          <PrivateRoute
+            path='/:catId/goals' 
+            component={GoalList}
+          />
+          <PrivateRoute
+            path='/:goalId/steps'
+            component={StepList}
+          />
+        </section>
+        
       </Switch>
     </>
   );

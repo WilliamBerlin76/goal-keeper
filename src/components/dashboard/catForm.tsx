@@ -29,7 +29,8 @@ const CatForm: React.FC<Props> = ({user, addCat}) => {
     };
 
     return (
-        <>
+        <>  
+            <p>Type and enter below to add a category</p>
             <input 
                 placeholder='category name'
                 name='name'

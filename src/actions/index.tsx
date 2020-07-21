@@ -73,6 +73,8 @@ export const updateCat = (userId: number, catId: number, change: object) => (dis
             dispatch({ type: EDIT_CAT, payload: res.data});
         })
         .catch(err => {
+            localStorage.clear();
+            sessionStorage.clear();
             console.log(err);
         });
 };

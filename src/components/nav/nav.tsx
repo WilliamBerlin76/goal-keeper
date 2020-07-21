@@ -34,41 +34,44 @@ const Nav: React.FC<Props> = ({ user, logOut }) => {
 
     const handleClick = (e: any) => {
         setMenuOpen(!menuOpen);
-    }
+    };
 
     return (
+        <>
         <div className='nav'>  
+            <h1 id='title'>Goal-Keeper</h1>
             {menuOpen ?
                 <ClearRoundedIcon 
                     fontSize="large"
                     onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px'}}
+                    style={{ position: 'fixed', right: '5px', top: '5px', marginRight: '13px'}}
                 />
                 :
                 <MenuRoundedIcon
                     fontSize="large"
                     onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px'}}
+                    style={{ position: 'fixed', right: '5px', top: '5px', marginRight: '13px'}}
                 />
             }
             
-            {menuOpen && (
-                <>
-                    {loggedIn && (
-                        <div className='nav-items'>
-                            <NavLink className='nav-item' to='/dashboard'>Dashboard</NavLink>
-                            <NavLink className='nav-item' to='/' onClick={() => logOut()}>Log Out</NavLink>
-                        </div>
-                    )}
-                    {!loggedIn && (
-                        <div className='nav-items'>
-                            <NavLink className='nav-item' to='/login'>Login</NavLink>
-                            <NavLink className='nav-item' to='/register'>Register</NavLink>
-                        </div>
-                    )}
-                </>
-            )} 
         </div>
+        {menuOpen && (
+            <>
+                {loggedIn && (
+                    <div className='nav-items'>
+                        <NavLink className='nav-item' to='/dashboard'>Dashboard</NavLink>
+                        <NavLink className='nav-item' to='/' onClick={() => logOut()}>Log Out</NavLink>
+                    </div>
+                )}
+                {!loggedIn && (
+                    <div className='nav-items'>
+                        <NavLink className='nav-item' to='/login'>Login</NavLink>
+                        <NavLink className='nav-item' to='/register'>Register</NavLink>
+                    </div>
+                )}
+            </>
+        )}
+        </>
     );
 };
 

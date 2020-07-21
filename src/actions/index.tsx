@@ -76,6 +76,7 @@ export const updateCat = (userId: number, catId: number, change: object) => (dis
             localStorage.clear();
             sessionStorage.clear();
             console.log(err);
+            dispatch({ type: LOG_OUT, payload: null })
         });
 };
 

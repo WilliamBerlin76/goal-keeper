@@ -56,14 +56,14 @@ const Nav: React.FC<Props> = ({ user, logOut }) => {
                 <>
                     {loggedIn && (
                         <div className='nav-items'>
-                            <NavLink to='/dashboard'>Dashboard</NavLink>
-                            <NavLink to='/' onClick={() => logOut()}>Log Out</NavLink>
+                            <NavLink className='nav-item' to='/dashboard'>Dashboard</NavLink>
+                            <NavLink className='nav-item' to='/' onClick={() => logOut()}>Log Out</NavLink>
                         </div>
                     )}
                     {!loggedIn && (
                         <div className='nav-items'>
-                            <NavLink to='/login'>Login</NavLink>
-                            <NavLink to='/register'>Register</NavLink>
+                            <NavLink className='nav-item' to='/login'>Login</NavLink>
+                            <NavLink className='nav-item' to='/register'>Register</NavLink>
                         </div>
                     )}
                 </>

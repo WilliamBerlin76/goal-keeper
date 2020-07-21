@@ -1,9 +1,22 @@
 .nav{
     position: fixed;
-    right: 8px;
-    top: 43px;
+    right: 0px;
+    top: 0px;
+    background: #d6d3d3;
     .nav-items{
         display: flex;
         flex-direction: column;
+        margin-top: 43px;
+        margin-right: 43px;
+        .nav-item{
+            text-decoration: none;
+            margin: 15px 5px;
+            color: #7a7575;
+            font-size: 1.2rem;
+            font-weight: 501;
+            &:hover{
+                color: #222222;
+            }
+        }
     }
 }

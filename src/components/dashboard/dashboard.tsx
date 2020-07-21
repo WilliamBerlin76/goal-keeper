@@ -36,7 +36,7 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
     }, [getCats, user.id]);
 
     return (
-        <section className='dash-section'>
+        <section className='main-comp-section'>
             <h2>Your Categories</h2>
             <p>
                 This is where you can categorize your goals. 
@@ -44,17 +44,25 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
                 view it's goal page.
             </p>
             <CatForm />
-            <h3>categories</h3>
-            <p>(Click a category to view your goals)</p>
-            {categories.map(cat => {
-                return(
-                <CatCard 
-                    key={cat.id}
-                    catId={cat.id}
-                    name={cat.name}
-                />
-                );
-            })}
+            
+            {categories.length === 0 ?
+                <p>You don't have any categories yet!</p>
+                :
+                <>
+                    <p>(Click a category to view your goals)</p>
+                    {categories.map(cat => {
+                        return(
+                        <CatCard 
+                            key={cat.id}
+                            catId={cat.id}
+                            name={cat.name}
+                        />
+                        );
+                    })}
+                </>
+            
+            }
+            
         </section>
     );
 };

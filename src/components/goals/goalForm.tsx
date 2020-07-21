@@ -30,14 +30,14 @@ const GoalForm: React.FC<Props> = ({user, catId, addGoal}) => {
     };
 
     return(
-        <>
+        <form className='add-forms'>
             <input 
                 placeholder='goal name'
                 name='name'
                 onChange={e => setGoal({name: e.target.value})}
             />
             <button onClick={handleSubmit}>Add Goal</button>
-        </>
+        </form>
     );
 };
 

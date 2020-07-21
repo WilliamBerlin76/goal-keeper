@@ -29,7 +29,7 @@ const CatForm: React.FC<Props> = ({user, addCat}) => {
     };
 
     return (
-        <>  
+        <form className='add-forms'>  
             <p>Type and enter below to add a category</p>
             <input 
                 placeholder='category name'
@@ -37,7 +37,7 @@ const CatForm: React.FC<Props> = ({user, addCat}) => {
                 onChange={e => setCategory({name: e.target.value})}
             />
             <button onClick={handleSubmit}>add category</button>
-        </>
+        </form>
     );
 };
 

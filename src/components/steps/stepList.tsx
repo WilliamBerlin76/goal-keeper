@@ -4,10 +4,12 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { getSteps } from '../../actions/index';
 
+import Loader from '../loader/loader';
 import StepForm from './stepForm';
 import StepCard from './stepCard';
 
 const mapState = (state: {
+                    isFetching: boolean;
                     user: {
                         username: string;
                         id: number
@@ -23,6 +25,7 @@ const mapState = (state: {
 
                 }) => {
             return ({
+                isFetching: state.isFetching,
                 user: state.user,
                 stepList: state.stepList
             });
@@ -40,7 +43,7 @@ interface StepProps extends RouteComponentProps<RouterProps>{};
 
 type Props = ConnectedProps<typeof connector> & RouterProps & StepProps
 
-const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
+const StepList: React.FC<Props> = ({ match, user, stepList, isFetching, getSteps}) => {
 
     useEffect(() => {
         getSteps(user.id, match.params.goalId)
@@ -60,6 +63,9 @@ const StepList: React.FC<Props> = ({ match, user, stepList, getSteps}) => {
             />
             {stepList.steps && (
                 stepList.steps.length === 0 ?
+                    isFetching === true ? 
+                    <Loader/>
+                    :
                     <p>This goal doesn't have any steps yet!</p>
                 :
                 stepList.steps.map(step => {

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-export const USER_START = 'USER_START';
+export const FETCH_START = 'FETCH_START'
+
 export const SET_USER = 'SET_USER';
 export const LOG_OUT = 'LOG_OUT';
 export const AUTH_ERR = 'AUTH_ERR';
@@ -21,7 +22,7 @@ export const DELETE_STEP = 'DELETE_STEP';
 export const EDIT_STEP = 'EDIT_STEP';
 
 export const authenticate = (userInfo: object, method: string, remember: boolean) => async (dispatch: any) => {
-    dispatch({ type: USER_START });
+    dispatch({ type: FETCH_START });
     method = method.toLowerCase();
     await axios.post(`https://node-goals.herokuapp.com/api/auth/${method}`, userInfo)
         .then(res => { 
@@ -56,6 +57,7 @@ export const logOut = () => (dispatch: any) => {
 };
 
 export const addCat = (userId: number, category: object) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .post(`/api/${userId}/categories/${userId}/add`, category)
         .then(res => {
@@ -67,6 +69,7 @@ export const addCat = (userId: number, category: object) => (dispatch: any) => {
 };
 
 export const updateCat = (userId: number, catId: number, change: object) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .put(`/api/${userId}/categories/${catId}/update`, change)
         .then(res => {
@@ -81,6 +84,7 @@ export const updateCat = (userId: number, catId: number, change: object) => (dis
 };
 
 export const deleteCat = (userId: number, catId: number) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .delete(`/api/${userId}/categories/${catId}/remove`)
         .then(res => {
@@ -92,6 +96,7 @@ export const deleteCat = (userId: number, catId: number) => (dispatch: any) => {
 };
 
 export const getCats = (userId: number) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .get(`/api/${userId}/categories/${userId}`)
         .then(res => {
@@ -103,6 +108,7 @@ export const getCats = (userId: number) => (dispatch: any) => {
 };
 
 export const addGoal = (userId: number, catId: string, goal: object) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .post(`/api/${userId}/goals/${catId}/add`, goal)
         .then(res => {
@@ -114,6 +120,7 @@ export const addGoal = (userId: number, catId: string, goal: object) => (dispatc
 };
 
 export const getGoals = (userId: number, catId: string) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth() 
         .get(`/api/${userId}/goals/${catId}`)
         .then(res => {
@@ -125,6 +132,7 @@ export const getGoals = (userId: number, catId: string) => (dispatch: any) => {
 };
 
 export const deleteGoal = (userId: number, goalId: number) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .delete(`/api/${userId}/goals/${goalId}/remove`)
         .then(res => {
@@ -136,6 +144,7 @@ export const deleteGoal = (userId: number, goalId: number) => (dispatch: any) =>
 };
 
 export const editGoal = (userId: number, goalId: number, change: {name: string}) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .put(`/api/${userId}/goals/${goalId}/update`, change)
         .then(res => {
@@ -147,6 +156,7 @@ export const editGoal = (userId: number, goalId: number, change: {name: string})
 };
 
 export const getSteps = (userId: number, goalId: string) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .get(`/api/${userId}/steps/${goalId}`)
         .then(res => {
@@ -158,6 +168,7 @@ export const getSteps = (userId: number, goalId: string) => (dispatch: any) => {
 };
 
 export const addStep = (userId: number, goalId: string, step: {name: string, stepNum: number}) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .post(`/api/${userId}/steps/${goalId}`, step)
         .then(res => {
@@ -169,6 +180,7 @@ export const addStep = (userId: number, goalId: string, step: {name: string, ste
 };
 
 export const removeStep = (userId: number, stepId: number) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .delete(`/api/${userId}/steps/${stepId}/remove`)
         .then(res => {
@@ -180,6 +192,7 @@ export const removeStep = (userId: number, stepId: number) => (dispatch: any) =>
 };
 
 export const editStep = (userId: number, stepId: number, changes: object) => (dispatch: any) => {
+    dispatch({ type: FETCH_START });
     axiosWithAuth()
         .put(`/api/${userId}/steps/${stepId}/update`, changes)
         .then(res => {

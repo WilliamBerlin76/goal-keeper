@@ -42,7 +42,9 @@ const Nav: React.FC<Props> = ({ user, logOut }) => {
         <div className='nav'>  
             <h1 id='title'>Goal-Keeper</h1>
             <div className='right-side'>
-                <span id='username'>{user.username}</span>
+                {user && 
+                    <span id='username'>{user.username}</span>
+                }
                 {menuOpen ?
                     <ClearRoundedIcon 
                         fontSize="large"

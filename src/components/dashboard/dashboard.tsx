@@ -44,7 +44,6 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
                 view it's goal page.
             </p>
             <CatForm />
-            
             {categories.length === 0 ?
                 <p>You don't have any categories yet!</p>
                 :

@@ -4,10 +4,13 @@ import { useHistory } from "react-router-dom";
 
 import { authenticate } from '../../actions/index';
 
+import Loader from '../loader/loader';
+
 import './authForm.scss';
 
-const mapState = (state: { user: object; error: string; }) => {
+const mapState = (state: { user: object; error: string; isFetching: boolean }) => {
     return{
+        isFetching: state.isFetching,
         user: state.user,
         error: state.error
     };
@@ -25,7 +28,7 @@ type Props = PropsFromRedux & {
     type: string,
 };
 
-const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
+const AuthForm: React.FC<Props> = ({ authenticate, type, error, isFetching }) => {
     const [user, setUser] = useState<object>({});
     const [remember, setRemember] = useState<boolean>(false);
     const history = useHistory();
@@ -81,7 +84,14 @@ const AuthForm: React.FC<Props> = ({authenticate, type, error}) => {
                 {error && (
                     <p className='auth-err'>{error}</p>
                 )}
-                <button className='auth-submit'>{type}</button>
+                {isFetching === true ?
+                    <div className='center-load'>
+                        <Loader />
+                    </div>
+                    :
+                    <button className='auth-submit'>{type}</button>
+                }
+                
             </form>  
         </section>
     );

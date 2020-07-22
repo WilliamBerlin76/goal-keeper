@@ -3,13 +3,17 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { addCat } from '../../actions/index';
 
+import Loader from '../loader/loader';
+
 const mapState = (state: {
+                    isFetching: boolean;
                     user: {
                         id: number;
                         username: string
                     }
                 }) => {
     return {
+        isFetching: state.isFetching,
         user: state.user
     };
 };
@@ -20,7 +24,7 @@ const connector = connect(mapState, mapDispatch);
 
 type Props = ConnectedProps<typeof connector>;
 
-const CatForm: React.FC<Props> = ({user, addCat}) => {
+const CatForm: React.FC<Props> = ({user, addCat, isFetching}) => {
     
     const [category, setCategory] = useState<object>({});
 
@@ -37,7 +41,12 @@ const CatForm: React.FC<Props> = ({user, addCat}) => {
                 name='name'
                 onChange={e => setCategory({name: e.target.value})}
             />
-            <button onClick={handleSubmit}>add category</button>
+            {isFetching === true ? 
+                <Loader />
+                :
+                <button onClick={handleSubmit}>add category</button>
+            }
+            
         </form>
     );
 };

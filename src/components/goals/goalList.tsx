@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { RouteComponentProps } from "react-router-dom";
 import { connect, ConnectedProps } from 'react-redux';
 
+import Loader from '../loader/loader';
 import GoalForm from './goalForm';
 import GoalCard from './goalCard';
 
 import { getGoals } from '../../actions/index'; 
 
 const mapState = (state: {
+                    isFetching: boolean;
                     user: {
                         username: string;
                         id: number;
@@ -21,6 +23,7 @@ const mapState = (state: {
                     }
                 }) => {
             return ({
+                isFetching: state.isFetching,
                 user: state.user,
                 goals: state.goals,
         });
@@ -38,7 +41,7 @@ interface GoalProps extends RouteComponentProps<RouterProps>{};
 
 type Props = ConnectedProps<typeof connector> & RouterProps & GoalProps;
 
-const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
+const GoalList: React.FC<Props> = ({ match, goals, user, isFetching, getGoals }) => {
 
     useEffect(() => {
         getGoals(user.id, match.params.catId)
@@ -59,8 +62,11 @@ const GoalList: React.FC<Props> = ({ match, goals, user, getGoals }) => {
             />
             {goals.goals && (
                 goals.goals.length === 0 ? 
-                    <p>You don't have any goals in this category!</p>
-                :
+                    isFetching === true ? 
+                    <Loader/>
+                    :
+                    <p>This category doesn't have any goals!</p>
+                    :
                 <>
                     <p>(click a goal to view steps)</p>
                     {goals.goals.map(goal => {

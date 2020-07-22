@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { connect, ConnectedProps } from 'react-redux';
 
+import Loader from '../loader/loader';
 import CatForm from './catForm';
 import CatCard from './catCard';
 import { getCats } from '../../actions/index';
@@ -9,6 +10,7 @@ import { getCats } from '../../actions/index';
 import "./dashboard.scss";
 
 const mapState = (state: {
+                    isFetching: boolean;
                     user: {
                         id: number;
                         username: string
@@ -19,6 +21,7 @@ const mapState = (state: {
                     }>
                 }) => {
         return ({
+            isFetching: state.isFetching,
             user: state.user,
             categories: state.categories
         });
@@ -30,7 +33,7 @@ const connector = connect(mapState, mapDispatch);
 
 type Props = ConnectedProps<typeof connector>;
 
-const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
+const Dashboard: React.FC<Props> = ({user, categories, getCats, isFetching}) => {
     useEffect(() => {
         getCats(user.id)
     }, [getCats, user.id]);
@@ -44,7 +47,11 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats}) => {
                 view it's goal page.
             </p>
             <CatForm />
+            
             {categories.length === 0 ?
+                isFetching === true ? 
+                <Loader/>
+                :
                 <p>You don't have any categories yet!</p>
                 :
                 <>

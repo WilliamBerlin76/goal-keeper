@@ -1,5 +1,5 @@
 import {
-    USER_START,
+    FETCH_START,
     SET_USER,
     SET_CAT,
     EDIT_CAT,
@@ -24,12 +24,13 @@ const initialState = {
             sessionUser ? JSON.parse(sessionUser) : null,
     categories: [],
     goals: {},
-    stepList: {}
+    stepList: {},
+    isFetching: false
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case USER_START:
+        case FETCH_START:
             return {
                 ...state,
                 isFetching: true,

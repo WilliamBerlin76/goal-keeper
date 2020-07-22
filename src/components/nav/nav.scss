@@ -1,22 +1,44 @@
 .nav{
     position: fixed;
-    right: 0px;
     top: 0px;
     background: #d6d3d3;
-    .nav-items{
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    #title{
+        font-size: 1.4rem;
+        margin-left: 13px
+    }
+    .right-side{
         display: flex;
-        flex-direction: column;
-        margin-top: 43px;
-        margin-right: 43px;
-        .nav-item{
-            text-decoration: none;
-            margin: 15px 5px;
-            color: #7a7575;
-            font-size: 1.2rem;
-            font-weight: 501;
-            &:hover{
-                color: #222222;
-            }
+        align-items: center;
+        #username{
+            margin-right: 15px;
+            font-size: 1.15rem;
+            font-weight: 401;
+        }
+    }
+}
+
+.nav-items{
+    background: #b1aeae;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    position: fixed;
+    right: 0;
+    top: 24px;
+    z-index: 0;
+    .nav-item{
+        text-decoration: none;
+        margin: 15px 40px 10px 10px;
+        color: #585858;
+        font-size: 1.2rem;
+        font-weight: 501;
+        &:hover{
+            color: #222222;
         }
     }
 }

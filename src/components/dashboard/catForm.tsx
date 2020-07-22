@@ -25,18 +25,20 @@ const CatForm: React.FC<Props> = ({user, addCat}) => {
     const [category, setCategory] = useState<object>({});
 
     const handleSubmit = (e: any)=> {
-        addCat(user.id, category)
+        e.preventDefault();
+        addCat(user.id, category);
     };
 
     return (
-        <>
+        <form className='add-forms'>  
+            <p>Type and enter below to add a category</p>
             <input 
                 placeholder='category name'
                 name='name'
                 onChange={e => setCategory({name: e.target.value})}
             />
             <button onClick={handleSubmit}>add category</button>
-        </>
+        </form>
     );
 };
 

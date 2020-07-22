@@ -83,10 +83,10 @@ const CatCard: React.FC<Props> = ({
       <div
         onMouseOver={() => setShowPen(true)}
         onMouseLeave={() => setShowPen(false)}
-        className="cat-card"
+        className="cards"
       >
         {canEdit ? (
-          <div>
+          <div className='edit-form'>
             <input value={newName.name} name="name" onChange={handleChange} />
             <button onClick={handleSubmit}>Save</button>
           </div>
@@ -96,14 +96,14 @@ const CatCard: React.FC<Props> = ({
         {showPen && (
           <div className="cat-buttons">
             <CreateTwoToneIcon
-              fontSize="small"
+              fontSize="default"
               opacity=".3"
               onMouseOver={bolden}
               onMouseLeave={grey}
               onClick={() => setCanEdit(!canEdit)}
             />
             <DeleteIcon
-              fontSize="small"
+              fontSize="default"
               opacity=".3"
               onMouseOver={bolden}
               onMouseLeave={grey}
@@ -113,7 +113,7 @@ const CatCard: React.FC<Props> = ({
         )}
       </div>
       {canDelete && (
-        <div>
+        <div className='delete-confirm'>
           <p>Are you sure you want to delete this category?</p>
           <button onClick={handleDelete}>Yes</button>
           <button onClick={() => setCanDelete(false)}>No</button>

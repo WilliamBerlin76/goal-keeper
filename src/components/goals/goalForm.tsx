@@ -26,18 +26,19 @@ const GoalForm: React.FC<Props> = ({user, catId, addGoal}) => {
     const [goal, setGoal] = useState<object>({})
 
     const handleSubmit = (e: any) => {
+        e.preventDefault();
         addGoal(user.id, catId, goal);
     };
 
     return(
-        <>
+        <form className='add-forms'>
             <input 
                 placeholder='goal name'
                 name='name'
                 onChange={e => setGoal({name: e.target.value})}
             />
             <button onClick={handleSubmit}>Add Goal</button>
-        </>
+        </form>
     );
 };
 

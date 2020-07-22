@@ -77,10 +77,10 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal, editGoal })
     <div
       onMouseOver={() => setShowPen(true)}
       onMouseLeave={() => setShowPen(false)}
-      className="goal-card"
+      className="cards"
     >
       {canEdit ? (
-        <div>
+        <div className='edit-form'>
           <input value={newName.name} name="name" onChange={handleChange} />
           <button onClick={handleEdit}>Save</button>
         </div>
@@ -91,14 +91,12 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal, editGoal })
       {showPen && (
         <div className="goal-buttons">
           <CreateTwoToneIcon
-            fontSize="small"
             opacity=".3"
             onMouseOver={bolden}
             onMouseLeave={grey}
             onClick={() => setCanEdit(!canEdit)}
           />
           <DeleteIcon
-            fontSize="small"
             opacity=".3"
             onMouseOver={bolden}
             onMouseLeave={grey}
@@ -108,7 +106,7 @@ const GoalCard: React.FC<Props> = ({ user, goalId, name, deleteGoal, editGoal })
       )}
     </div>
     {canDelete && (
-      <div>
+      <div className='delete-confirm'>
         <p>Are you sure you want to delete this goal?</p>
         <button onClick={handleDelete}>Yes</button>
         <button onClick={() => setCanDelete(false)}>No</button>

@@ -11,6 +11,7 @@ import './nav.scss';
 const mapState = (state: {
                     user: {
                         id: number;
+                        username: string
                     }
                 }) => {
                 return {
@@ -34,41 +35,47 @@ const Nav: React.FC<Props> = ({ user, logOut }) => {
 
     const handleClick = (e: any) => {
         setMenuOpen(!menuOpen);
-    }
+    };
 
     return (
+        <>
         <div className='nav'>  
-            {menuOpen ?
-                <ClearRoundedIcon 
-                    fontSize="large"
-                    onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px', cursor: 'pointer'}}
-                />
-                :
-                <MenuRoundedIcon
-                    fontSize="large"
-                    onClick={handleClick}
-                    style={{ position: 'fixed', right: '5px', top: '5px', cursor: 'pointer'}}
-                />
-            }
+            <h1 id='title'>Goal-Keeper</h1>
+            <div className='right-side'>
+                <span id='username'>{user.username}</span>
+                {menuOpen ?
+                    <ClearRoundedIcon 
+                        fontSize="large"
+                        onClick={handleClick}
+                        style={{ marginRight: '13px', cursor: 'pointer' }}
+                    />
+                    :
+                    <MenuRoundedIcon
+                        fontSize="large"
+                        onClick={handleClick}
+                        style={{ marginRight: '13px', cursor: 'pointer' }}
+                    />
+                }
+            </div>
             
-            {menuOpen && (
-                <>
-                    {loggedIn && (
-                        <div className='nav-items'>
-                            <NavLink className='nav-item' to='/dashboard'>Dashboard</NavLink>
-                            <NavLink className='nav-item' to='/' onClick={() => logOut()}>Log Out</NavLink>
-                        </div>
-                    )}
-                    {!loggedIn && (
-                        <div className='nav-items'>
-                            <NavLink className='nav-item' to='/login'>Login</NavLink>
-                            <NavLink className='nav-item' to='/register'>Register</NavLink>
-                        </div>
-                    )}
-                </>
-            )} 
         </div>
+        {menuOpen && (
+            <>
+                {loggedIn && (
+                    <div className='nav-items'>
+                        <NavLink className='nav-item' to='/dashboard'>Dashboard</NavLink>
+                        <NavLink className='nav-item' to='/' onClick={() => logOut()}>Log Out</NavLink>
+                    </div>
+                )}
+                {!loggedIn && (
+                    <div className='nav-items'>
+                        <NavLink className='nav-item' to='/login'>Login</NavLink>
+                        <NavLink className='nav-item' to='/register'>Register</NavLink>
+                    </div>
+                )}
+            </>
+        )}
+        </>
     );
 };
 

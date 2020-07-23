@@ -9,15 +9,17 @@ const Loader: React.FC = () => {
         setTimeout(() => {
             if(loadCount < 5 && ascend === true){
                 setLoadCount(loadCount + 1);
-                setLoading('=' + loading + '=');
+                let newLoad = '=' + loading + '=';
+                setLoading(newLoad);
             } else if (loadCount < 5) {
                 setLoadCount(loadCount + 1);
-                setLoading(loading.substr(1, loading.length - 2));
+                let newLoad = loading.substr(1, loading.length - 2);
+                setLoading(newLoad);
             } else {
                 setLoadCount(0);
                 setAscend(!ascend);
             }
-        }, 250);
+        }, 100);
     });
 
     return(

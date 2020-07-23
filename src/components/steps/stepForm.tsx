@@ -6,14 +6,14 @@ import Loader from '../loader/loader';
 import { addStep } from '../../actions/index';
 
 const mapState = (state: {
-                    isFetching: boolean;
+                    isPosting: boolean;
                     user: {
                         id: number,
                         username: string
                     }
                 }) => {
         return {
-            isFetching: state.isFetching,
+            isPosting: state.isPosting,
             user: state.user
         };
 };
@@ -26,7 +26,7 @@ type Props = ConnectedProps<typeof connector> & {
     goalId: string
 };
 
-const StepForm: React.FC<Props> = ({user, goalId, addStep, isFetching}) => {
+const StepForm: React.FC<Props> = ({user, goalId, addStep, isPosting}) => {
     const [step, setStep] = useState<any>({})
 
     const handleSubmit = (e: any) => {
@@ -53,7 +53,7 @@ const StepForm: React.FC<Props> = ({user, goalId, addStep, isFetching}) => {
                     stepNum: e.target.value
                 })}
             />
-            {isFetching === true ? 
+            {isPosting === true ? 
                 <Loader />
                 :
                 <button onClick={handleSubmit}>Add Step</button>

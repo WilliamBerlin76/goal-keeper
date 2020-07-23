@@ -13,7 +13,8 @@ import {
     ADD_STEP,
     DELETE_STEP,
     EDIT_STEP,
-    LOG_OUT
+    LOG_OUT,
+    POST_START
 } from '../actions';
 
 let localUser = localStorage.getItem('persist-user');
@@ -25,7 +26,8 @@ const initialState = {
     categories: [],
     goals: {},
     stepList: {},
-    isFetching: false
+    isFetching: false,
+    isPosting: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,10 +38,17 @@ const reducer = (state = initialState, action) => {
                 isFetching: true,
                 error: ''
             };
+        case POST_START:
+            return {
+                ...state,
+                isPosting: true,
+                error: ''
+            }
         case SET_USER:
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 user: {
                     id: action.payload.id,
@@ -57,12 +66,14 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: action.payload
             };
         case SET_CAT:
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 categories: action.payload
             };
@@ -71,6 +82,7 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 categories: state.categories.map(cat => {
                     if (checkId === cat.id){
@@ -83,6 +95,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 categories: state.categories.filter(cat => cat.id !== action.payload)
             };
@@ -90,6 +103,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching:false,
+                isPosting: false,
                 error: '',
                 goals: action.payload
             };
@@ -97,6 +111,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 goals: action.payload
             };
@@ -104,6 +119,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 goals: {
                     ...state.goals,
@@ -114,6 +130,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 goals: {
                     ...state.goals,
@@ -129,6 +146,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 stepList: action.payload
             };
@@ -136,6 +154,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 stepList: {
                     ...state.stepList,
@@ -146,6 +165,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 stepList: {
                     ...state.stepList,
@@ -169,6 +189,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isPosting: false,
                 error: '',
                 stepList: {
                     ...state.stepList,

@@ -47,7 +47,6 @@ const Dashboard: React.FC<Props> = ({user, categories, getCats, isFetching}) => 
                 view it's goal page.
             </p>
             <CatForm />
-            
             {categories.length === 0 ?
                 isFetching === true ? 
                 <Loader/>

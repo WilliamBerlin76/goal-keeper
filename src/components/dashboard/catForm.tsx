@@ -6,14 +6,14 @@ import { addCat } from '../../actions/index';
 import Loader from '../loader/loader';
 
 const mapState = (state: {
-                    isFetching: boolean;
+                    isPosting: boolean;
                     user: {
                         id: number;
                         username: string
                     }
                 }) => {
     return {
-        isFetching: state.isFetching,
+        isPosting: state.isPosting,
         user: state.user
     };
 };
@@ -24,7 +24,7 @@ const connector = connect(mapState, mapDispatch);
 
 type Props = ConnectedProps<typeof connector>;
 
-const CatForm: React.FC<Props> = ({user, addCat, isFetching}) => {
+const CatForm: React.FC<Props> = ({user, addCat, isPosting}) => {
     
     const [category, setCategory] = useState<object>({});
 
@@ -41,7 +41,7 @@ const CatForm: React.FC<Props> = ({user, addCat, isFetching}) => {
                 name='name'
                 onChange={e => setCategory({name: e.target.value})}
             />
-            {isFetching === true ? 
+            {isPosting === true ? 
                 <Loader />
                 :
                 <button onClick={handleSubmit}>add category</button>

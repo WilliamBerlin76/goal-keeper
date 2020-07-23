@@ -8,9 +8,9 @@ import Loader from '../loader/loader';
 
 import './authForm.scss';
 
-const mapState = (state: { user: object; error: string; isFetching: boolean }) => {
+const mapState = (state: { user: object; error: string; isPosting: boolean }) => {
     return{
-        isFetching: state.isFetching,
+        isPosting: state.isPosting,
         user: state.user,
         error: state.error
     };
@@ -28,7 +28,7 @@ type Props = PropsFromRedux & {
     type: string,
 };
 
-const AuthForm: React.FC<Props> = ({ authenticate, type, error, isFetching }) => {
+const AuthForm: React.FC<Props> = ({ authenticate, type, error, isPosting }) => {
     const [user, setUser] = useState<object>({});
     const [remember, setRemember] = useState<boolean>(false);
     const history = useHistory();
@@ -84,7 +84,7 @@ const AuthForm: React.FC<Props> = ({ authenticate, type, error, isFetching }) =>
                 {error && (
                     <p className='auth-err'>{error}</p>
                 )}
-                {isFetching === true ?
+                {isPosting === true ?
                     <div className='center-load'>
                         <Loader />
                     </div>

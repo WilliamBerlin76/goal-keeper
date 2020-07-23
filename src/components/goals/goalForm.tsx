@@ -6,14 +6,14 @@ import Loader from '../loader/loader';
 import { addGoal } from '../../actions/index';
 
 const mapState = (state: {
-                    isFetching: boolean
+                    isPosting: boolean
                     user: {
                         id: number,
                         username: string
                     }
                 }) => {
         return {
-            isFetching: state.isFetching,
+            isPosting: state.isPosting,
             user: state.user
         };
 };
@@ -26,7 +26,7 @@ type Props = ConnectedProps<typeof connector> & {
     catId: string
 };
 
-const GoalForm: React.FC<Props> = ({user, catId, addGoal, isFetching}) => {
+const GoalForm: React.FC<Props> = ({user, catId, addGoal, isPosting}) => {
     const [goal, setGoal] = useState<object>({})
 
     const handleSubmit = (e: any) => {
@@ -41,7 +41,7 @@ const GoalForm: React.FC<Props> = ({user, catId, addGoal, isFetching}) => {
                 name='name'
                 onChange={e => setGoal({name: e.target.value})}
             />
-            {isFetching === true ?
+            {isPosting === true ?
                 <Loader />
                 :
                 <button onClick={handleSubmit}>Add Goal</button>

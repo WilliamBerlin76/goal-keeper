@@ -56,7 +56,7 @@ const StepForm: React.FC<Props> = ({user, goalId, addStep, isPosting}) => {
             {isPosting === true ? 
                 <Loader />
                 :
-                <button onClick={handleSubmit}>Add Step</button>
+                <button onClick={handleSubmit} className='step-button'>Add Step</button>
             }
             
         </form>

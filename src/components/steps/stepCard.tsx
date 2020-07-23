@@ -84,8 +84,8 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
             onMouseLeave={() => setShowPen(false)}
         >
             {canEdit ? (
-                <div className='edit-form'>
-                    <input type='number' value={newStep.stepNum} name="stepNum" onChange={editStepChange}/>
+                <div className='edit-form step-form'>
+                    <input id='number-input' type='number' value={newStep.stepNum} name="stepNum" onChange={editStepChange}/>
                     <input value={newStep.name} name="name" onChange={editStepChange}/>
                     <button onClick={handleEdit}>Save</button>
                 </div>
@@ -93,7 +93,7 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
                 <span>{displayStep.stepNum}. {displayStep.name}</span>
             )}
             {showPen && (
-                <div className="goal-buttons">
+                <div className="edit-icons">
                     <CreateTwoToneIcon
                         opacity=".3"
                         onMouseOver={bolden}

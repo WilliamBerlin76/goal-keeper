@@ -14,17 +14,16 @@ const App: React.FC = () => {
   return (
     <>
       <Nav/>
-      <Switch>
-        <Route 
-          path='/register'
-          render={props => <Register type='Register' {...props}/>}
-        />
-        <Route 
-          path='/login'
-          render={props => <Register type='Login' {...props}/>}
-        />
-        
+      <Switch> 
         <section className='main-comps'>
+          <Route 
+            path='/register'
+            render={props => <Register type='Register' {...props}/>}
+          />
+          <Route 
+            path='/login'
+            render={props => <Register type='Login' {...props}/>}
+          />
           <PrivateRoute path='/dashboard' component={Dashboard} />
           <PrivateRoute
             path='/:catId/goals' 

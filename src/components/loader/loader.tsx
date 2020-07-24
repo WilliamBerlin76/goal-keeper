@@ -1,30 +1,57 @@
 import React, { useEffect, useState } from 'react';
 
+type LoadTypes = {
+    loading: string;
+    count: number;
+    ascend: boolean
+}
+
 const Loader: React.FC = () => {
-    const [loading, setLoading] = useState<string>('Loading');
-    const [loadCount, setLoadCount] = useState<number>(0);
-    const [ascend, setAscend] = useState<boolean>(true);
+    
+    const [loadState, setLoadState] = useState<LoadTypes>({
+                                                        loading: 'Loading',
+                                                        count: 0,
+                                                        ascend: true
+                                                    });
 
     useEffect(() => {
+        let mounted = true;
         setTimeout(() => {
-            if(loadCount < 5 && ascend === true){
-                setLoadCount(loadCount + 1);
-                let newLoad = '=' + loading + '=';
-                setLoading(newLoad);
-            } else if (loadCount < 5) {
-                setLoadCount(loadCount + 1);
-                let newLoad = loading.substr(1, loading.length - 2);
-                setLoading(newLoad);
+            if(loadState.count < 5 && loadState.ascend === true){
+                let newLoad = '=' + loadState.loading + '=';
+                if(mounted === true){
+                    setLoadState({
+                        ...loadState,
+                        count: loadState.count + 1,
+                        loading: newLoad
+                    });
+                }
+            } else if (loadState.count < 5) {
+                let newLoad = loadState.loading.substr(1, loadState.loading.length - 2);
+                if(mounted === true){
+                    setLoadState({
+                        ...loadState,
+                        count: loadState.count + 1,
+                        loading: newLoad
+                    });
+                }
             } else {
-                setLoadCount(0);
-                setAscend(!ascend);
+                if(mounted === true){
+                    setLoadState({
+                        ...loadState,
+                        count: 0,
+                        ascend: !loadState.ascend
+                    });
+                }
             }
         }, 100);
-    });
+        return function(){mounted = false};
+    }, [loadState]);
 
+    
     return(
-        <p>{loading}</p>
+        <p>{loadState.loading}</p>
     )
 };
 
-export default Loader
+export default Loader;

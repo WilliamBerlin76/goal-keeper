@@ -14,8 +14,8 @@ const App: React.FC = () => {
   return (
     <>
       <Nav/>
-      <Switch> 
-        <section className='main-comps'>
+      <section className='main-comps'>
+        <Switch> 
           <Route 
             path='/register'
             render={props => <Register type='Register' {...props}/>}
@@ -33,9 +33,8 @@ const App: React.FC = () => {
             path='/:goalId/steps'
             component={StepList}
           />
-        </section>
-        
-      </Switch>
+        </Switch>
+      </section>
     </>
   );
 };

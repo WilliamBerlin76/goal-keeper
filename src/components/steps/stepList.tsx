@@ -53,8 +53,8 @@ const StepList: React.FC<Props> = ({ match, user, stepList, isFetching, getSteps
         <div className='main-comp-section'>
             <h2>Goal: {stepList.goal}</h2>
             <p>
-                Below are the steps you will to achieve
-                to complete your goal: {stepList.goal}.
+                Below are the steps you will complete
+                to achieve your goal: {stepList.goal}.
                 You can add steps to this goal with the
                 form below.
             </p>

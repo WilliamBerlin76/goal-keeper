@@ -61,7 +61,12 @@
     align-items: center;
     &:hover{
         background: #c8c8c8;
-        cursor: pointer
+    }
+    span{
+        &:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
     }
     .edit-form{
         input{

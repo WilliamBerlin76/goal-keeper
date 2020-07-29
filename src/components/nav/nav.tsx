@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import ClearRoundedIcon from '@material-ui/icons/ClearRounded';
 
@@ -28,6 +28,7 @@ type Props = ConnectedProps<typeof connector>;
 const Nav: React.FC<Props> = ({ user, logOut }) => {
     const [loggedIn, setLoggedIn] = useState<boolean>();
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    const history = useHistory();
 
     useEffect(() => {
         user ? setLoggedIn(true) : setLoggedIn(false);
@@ -40,7 +41,9 @@ const Nav: React.FC<Props> = ({ user, logOut }) => {
     return (
         <>
         <div className='nav'>  
-            <h1 id='title'>Goal-Keeper</h1>
+            <h1 id='title'
+                onClick={() => history.push('/')}
+            >Goal-Keeper</h1>
             <div className='right-side'>
                 {user && 
                     <span id='username'>{user.username}</span>

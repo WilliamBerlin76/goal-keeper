@@ -2,5 +2,32 @@
     background-image: url('../../assets/building.jpg');
     background-size: cover;
     height: 100vh;
-    margin-top: -12px;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+
+    .headline-container{
+        width: 75%;
+        margin-top: 100px;
+        padding-left: 20px;
+        h1{
+            font-size: 1.8rem;
+        }
+        .sign-up-button{
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 30%;
+            min-width: 200px;
+            margin: 0 auto 15px;
+            height: 40px;
+            border-radius: 50px;
+            border: none;
+            background: #c7c6c6;
+            transition: .25s;
+            &:hover{
+                background: #b8b8b8
+            }
+        }
+    }
 }

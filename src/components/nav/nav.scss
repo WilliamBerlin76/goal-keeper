@@ -3,13 +3,14 @@
     top: 0px;
     background: #d6d3d3;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
     #title{
         font-size: 1.4rem;
         margin-left: 13px;
+        cursor: pointer;
         @media(max-width: 500px){
             font-size: 1.2rem;
         }
@@ -36,9 +37,9 @@
     position: fixed;
     right: 0;
     top: 24px;
-    z-index: 0;
+    z-index: 1;
     @media(max-width: 500px){
-        top: 20px
+        top: 18px
     }
     .nav-item{
         text-decoration: none;

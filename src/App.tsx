@@ -18,7 +18,7 @@ const App: React.FC = () => {
       <section className='main-comps'>
         <Switch> 
           <Route 
-            path='/'
+            exact path='/'
             component={Landing}
           />
           <Route 

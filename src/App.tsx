@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import './App.scss';
 
+import Landing from './components/landing/landing';
 import Register from './components/auth/authForm';
 import Nav from './components/nav/nav';
 import Dashboard from './components/dashboard/dashboard';
@@ -16,6 +17,10 @@ const App: React.FC = () => {
       <Nav/>
       <section className='main-comps'>
         <Switch> 
+          <Route 
+            path='/'
+            component={Landing}
+          />
           <Route 
             path='/register'
             render={props => <Register type='Register' {...props}/>}

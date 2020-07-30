@@ -24,13 +24,23 @@ const connector = connect(mapState, mapDispatch);
 
 type Props = ConnectedProps<typeof connector>;
 
+type catTypes = {
+    name: string;
+}
+
 const CatForm: React.FC<Props> = ({user, addCat, isPosting}) => {
     
-    const [category, setCategory] = useState<object>({});
+    const [category, setCategory] = useState<catTypes>({name: ''});
+    const [err, setErr] = useState<boolean>(false);
 
     const handleSubmit = (e: any)=> {
         e.preventDefault();
-        addCat(user.id, category);
+        if(!category.name) {
+            setErr(true);
+        } else {
+            setErr(false);
+            addCat(user.id, category);
+        }
     };
 
     return (
@@ -41,6 +51,7 @@ const CatForm: React.FC<Props> = ({user, addCat, isPosting}) => {
                 name='name'
                 onChange={e => setCategory({name: e.target.value})}
             />
+            {err && <span className='auth-err'>must submit a category name</span>}
             {isPosting === true ? 
                 <Loader />
                 :

@@ -58,17 +58,17 @@ const AuthForm: React.FC<Props> = ({ authenticate, type, error, isPosting }) => 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (!user.username){
-            setUserNameErr(true)
+            setUserNameErr(true);
         } else if (!user.email && type === 'Register'){
-            setEmailErr(true)
+            setEmailErr(true);
         } else if (!emailReg.test(user.email) && type === 'Register'){
             setInvalidEmail(true);
         } else if (!user.password){
-            setPasswordErr(true)
+            setPasswordErr(true);
         } else {
             await authenticate(user, type, remember);
             history.push('/dashboard');
-        }
+        };
     };
 
     return (

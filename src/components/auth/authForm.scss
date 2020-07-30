@@ -30,9 +30,6 @@
         }
     }
 
-    .auth-err{
-        color: red;
-    }
     .center-load{
         margin: 0 auto
     }
@@ -51,4 +48,8 @@
             background: #b8b8b8
         }
     }
+}
+
+.auth-err{
+    color: red;
 }

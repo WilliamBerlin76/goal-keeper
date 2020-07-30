@@ -26,12 +26,22 @@ type Props = ConnectedProps<typeof connector> & {
     catId: string
 };
 
+type goalTypes = {
+    name: string;
+};
+
 const GoalForm: React.FC<Props> = ({user, catId, addGoal, isPosting}) => {
-    const [goal, setGoal] = useState<object>({})
+    const [goal, setGoal] = useState<goalTypes>({name: ''});
+    const [err, setErr] = useState<boolean>(false)
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        addGoal(user.id, catId, goal);
+        if (!goal.name){
+            setErr(true);
+        } else {
+            setErr(false);
+            addGoal(user.id, catId, goal);
+        }     
     };
 
     return(
@@ -41,12 +51,12 @@ const GoalForm: React.FC<Props> = ({user, catId, addGoal, isPosting}) => {
                 name='name'
                 onChange={e => setGoal({name: e.target.value})}
             />
+            {err && <span className='auth-err'>must submit a goal name</span>}
             {isPosting === true ?
                 <Loader />
                 :
                 <button onClick={handleSubmit}>Add Goal</button>
             }
-            
         </form>
     );
 };

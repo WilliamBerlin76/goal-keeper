@@ -28,10 +28,26 @@ type Props = PropsFromRedux & {
     type: string,
 };
 
+type userTypes = {
+    username: string;
+    email: string;
+    password: string;
+}
+
 const AuthForm: React.FC<Props> = ({ authenticate, type, error, isPosting }) => {
-    const [user, setUser] = useState<object>({});
+    const [user, setUser] = useState<userTypes>({
+                                                    username: '',
+                                                    email: '',
+                                                    password: ''
+                                                });
     const [remember, setRemember] = useState<boolean>(false);
+    const [usernameErr, setUserNameErr] = useState<boolean>(false);
+    const [emailErr, setEmailErr] = useState<boolean>(false);
+    const [invalidEmail, setInvalidEmail] = useState<boolean>(false);
+    const [passwordErr, setPasswordErr] = useState<boolean>(false);
     const history = useHistory();
+    const emailReg = new RegExp(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
+
     const handleChange = (e: any) => {
         setUser({
             ...user,
@@ -41,8 +57,18 @@ const AuthForm: React.FC<Props> = ({ authenticate, type, error, isPosting }) => 
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        await authenticate(user, type, remember);
-        history.push('/dashboard');
+        if (!user.username){
+            setUserNameErr(true)
+        } else if (!user.email && type === 'Register'){
+            setEmailErr(true)
+        } else if (!emailReg.test(user.email) && type === 'Register'){
+            setInvalidEmail(true);
+        } else if (!user.password){
+            setPasswordErr(true)
+        } else {
+            await authenticate(user, type, remember);
+            history.push('/dashboard');
+        }
     };
 
     return (
@@ -59,7 +85,10 @@ const AuthForm: React.FC<Props> = ({ authenticate, type, error, isPosting }) => 
                     name='username'
                     onChange={handleChange}
                 />
-                {type === 'Register' &&
+                {usernameErr && (
+                    <span className='auth-err'>Must submit a username</span>
+                )}
+                {type === 'Register' && 
                     <input
                         placeholder='Email'
                         type='text'
@@ -67,12 +96,21 @@ const AuthForm: React.FC<Props> = ({ authenticate, type, error, isPosting }) => 
                         onChange={handleChange}
                     />
                 }
+                {emailErr && (
+                    <span className='auth-err'>Must submit an email</span>
+                )}
+                {invalidEmail && (
+                    <span className='auth-err'>Email is invalid</span>
+                )}
                 <input
                     placeholder="Password"
                     type='password'
                     name='password'
                     onChange={handleChange}
                 />
+                {passwordErr && (
+                    <span className='auth-err'>Must submit a password</span>
+                )}
                 <div className='remember-check'>
                     <input 
                         id='remember'

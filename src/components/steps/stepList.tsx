@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, useHistory } from "react-router-dom";
 import { connect, ConnectedProps } from 'react-redux';
 
 import { getSteps } from '../../actions/index';
@@ -45,13 +45,15 @@ type Props = ConnectedProps<typeof connector> & RouterProps & StepProps
 
 const StepList: React.FC<Props> = ({ match, user, stepList, isFetching, getSteps}) => {
 
+    const history = useHistory();
+
     useEffect(() => {
         getSteps(user.id, match.params.goalId)
     }, [getSteps, user.id, match.params.goalId]);
 
     return (
         <div className='main-comp-section'>
-            <h2>Goal: {stepList.goal}</h2>
+            <h2 className='back-click' onClick={() => history.goBack()}>Goal: {stepList.goal}</h2>
             <p>
                 Below are the steps you will complete
                 to achieve your goal: {stepList.goal}.

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, useHistory } from "react-router-dom";
 import { connect, ConnectedProps } from 'react-redux';
 
 import Loader from '../loader/loader';
@@ -43,13 +43,15 @@ type Props = ConnectedProps<typeof connector> & RouterProps & GoalProps;
 
 const GoalList: React.FC<Props> = ({ match, goals, user, isFetching, getGoals }) => {
 
+    const history = useHistory();
+
     useEffect(() => {
         getGoals(user.id, match.params.catId)
     }, [getGoals, user.id, match.params.catId]);
     
     return (
         <section className='main-comp-section'>  
-            <h2>Category: {goals.category}</h2>
+            <h2 className='back-click' onClick={() => history.push(`/dashboard`)}>Category: {goals.category}</h2>
 
             <p>
                 Here are your goals for the 
@@ -67,18 +69,18 @@ const GoalList: React.FC<Props> = ({ match, goals, user, isFetching, getGoals })
                     :
                     <p>This category doesn't have any goals!</p>
                     :
-                <>
-                    <p>(click a goal to view steps)</p>
-                    {goals.goals.map(goal => {
-                        return (
-                            <GoalCard
-                                key={goal.id}
-                                goalId={goal.id} 
-                                name={goal.name}
-                            />
-                        )
-                    })}
-                </>
+                    <>
+                        <p>(click a goal to view steps)</p>
+                        {goals.goals.map(goal => {
+                            return (
+                                <GoalCard
+                                    key={goal.id}
+                                    goalId={goal.id} 
+                                    name={goal.name}
+                                />
+                            )
+                        })}
+                    </>
             )}
         </section>
     );

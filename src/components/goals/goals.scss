@@ -10,5 +10,9 @@
 }
 
 .back-click{
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    .list-header{
+        margin: auto 20px;
+    }
 }

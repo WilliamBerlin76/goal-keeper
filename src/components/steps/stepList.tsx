@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { connect, ConnectedProps } from 'react-redux';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { getSteps } from '../../actions/index';
 
@@ -53,7 +54,14 @@ const StepList: React.FC<Props> = ({ match, user, stepList, isFetching, getSteps
 
     return (
         <div className='main-comp-section'>
-            <h2 className='back-click' onClick={() => history.goBack()}>Goal: {stepList.goal}</h2>
+            <div className='back-click'>
+                <ArrowBackIcon 
+                    onClick={() => history.goBack()}
+                    style={ { cursor: "pointer" } } 
+                />   
+                <h2 className='list-header'>Goal: {stepList.goal}</h2>
+            </div>
+            
             <p>
                 Below are the steps you will complete
                 to achieve your goal: {stepList.goal}.

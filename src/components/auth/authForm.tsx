@@ -53,21 +53,44 @@ const AuthForm: React.FC<Props> = ({ authenticate, type, error, isPosting }) => 
             ...user,
             [e.target.name]: e.target.value
         });
+        if (user.username){
+            setUserNameErr(false);
+        } 
+        if (user.email && type === 'Register'){
+            setEmailErr(false);
+        } 
+        if (emailReg.test(user.email) && type === 'Register'){
+            setInvalidEmail(false);
+        } 
+        if (user.password){
+            setPasswordErr(false);
+        }
     };
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (!user.username){
             setUserNameErr(true);
-        } else if (!user.email && type === 'Register'){
+        } 
+        if (!user.email && type === 'Register'){
             setEmailErr(true);
-        } else if (!emailReg.test(user.email) && type === 'Register'){
+        } 
+        if (!emailReg.test(user.email) && type === 'Register'){
             setInvalidEmail(true);
-        } else if (!user.password){
+        } 
+        if (!user.password){
             setPasswordErr(true);
+        }
+        if (type === "Register") {
+            if (user.username && user.email && emailReg.test(user.email) && user.password){
+                await authenticate(user, type, remember);
+                history.push('/dashboard');
+            } 
         } else {
-            await authenticate(user, type, remember);
-            history.push('/dashboard');
+            if (user.username && user.password){
+                await authenticate(user, type, remember);
+                history.push('/dashboard');
+            }
         };
     };
 

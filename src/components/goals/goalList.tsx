@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { connect, ConnectedProps } from 'react-redux';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import Loader from '../loader/loader';
 import GoalForm from './goalForm';
@@ -50,9 +51,15 @@ const GoalList: React.FC<Props> = ({ match, goals, user, isFetching, getGoals })
     }, [getGoals, user.id, match.params.catId]);
     
     return (
-        <section className='main-comp-section'>  
-            <h2 className='back-click' onClick={() => history.push(`/dashboard`)}>Category: {goals.category}</h2>
-
+        <section className='main-comp-section'>
+            <div className='back-click' >
+                <ArrowBackIcon 
+                    onClick={() => history.push(`/dashboard`)}
+                    style={ { cursor: "pointer" } } 
+                />   
+                <h2 className='list-header'>Category: {goals.category}</h2>
+            </div>
+            
             <p>
                 Here are your goals for the 
                 category: {goals.category}.

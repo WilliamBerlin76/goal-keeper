@@ -41,7 +41,7 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
     const [showPen, setShowPen] = useState<boolean>(false);
     const [newStep, setStep] = useState<nameTypes>({ name, stepNum });
     const [displayStep, setDisplayStep] = useState<nameTypes>({ name, stepNum });
-    // const history = useHistory();
+    const blockInvalidChar = (e: any) => ['e', 'E', '+', '-', '.'].includes(e.key) && e.preventDefault();
 
     useEffect(() => {
         setDisplayStep({
@@ -85,7 +85,14 @@ const StepCard: React.FC<Props> = ({ user, stepId, name, stepNum, removeStep, ed
         >
             {canEdit ? (
                 <div className='edit-form step-form'>
-                    <input id='number-input' type='number' value={newStep.stepNum} name="stepNum" onChange={editStepChange}/>
+                    <input 
+                        id='number-input' 
+                        type='number' 
+                        value={newStep.stepNum} 
+                        name="stepNum" 
+                        onKeyDown={blockInvalidChar} 
+                        onChange={editStepChange}
+                    />
                     <input value={newStep.name} name="name" onChange={editStepChange}/>
                     <button onClick={handleEdit}>Save</button>
                 </div>

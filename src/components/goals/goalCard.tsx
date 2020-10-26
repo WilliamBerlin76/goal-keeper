@@ -19,7 +19,7 @@ const mapState = (state: {
             };
 };
 
-const mapDispatch = { deleteGoal, editGoal }
+const mapDispatch = { deleteGoal, editGoal };
 
 const connector = connect(mapState, mapDispatch);
 

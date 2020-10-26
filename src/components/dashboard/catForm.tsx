@@ -31,16 +31,10 @@ type catTypes = {
 const CatForm: React.FC<Props> = ({user, addCat, isPosting}) => {
     
     const [category, setCategory] = useState<catTypes>({name: ''});
-    const [err, setErr] = useState<boolean>(false);
 
     const handleSubmit = (e: any)=> {
         e.preventDefault();
-        if(!category.name) {
-            setErr(true);
-        } else {
-            setErr(false);
-            addCat(user.id, category);
-        }
+        addCat(user.id, category);
     };
 
     return (
@@ -51,11 +45,13 @@ const CatForm: React.FC<Props> = ({user, addCat, isPosting}) => {
                 name='name'
                 onChange={e => setCategory({name: e.target.value})}
             />
-            {err && <span className='auth-err'>must submit a category name</span>}
             {isPosting === true ? 
                 <Loader />
                 :
-                <button onClick={handleSubmit}>add category</button>
+                <button 
+                    onClick={handleSubmit} 
+                    disabled={!category.name ? true : false}
+                >add category</button>
             }
             
         </form>

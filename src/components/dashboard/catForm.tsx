@@ -50,7 +50,7 @@ const CatForm: React.FC<Props> = ({user, addCat, isPosting}) => {
                 :
                 <button 
                     onClick={handleSubmit} 
-                    disabled={!category.name ? true : false}
+                    disabled={category.name.length === 0}
                 >add category</button>
             }
             

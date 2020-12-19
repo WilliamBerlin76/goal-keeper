@@ -32,16 +32,10 @@ type goalTypes = {
 
 const GoalForm: React.FC<Props> = ({user, catId, addGoal, isPosting}) => {
     const [goal, setGoal] = useState<goalTypes>({name: ''});
-    const [err, setErr] = useState<boolean>(false)
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        if (!goal.name){
-            setErr(true);
-        } else {
-            setErr(false);
-            addGoal(user.id, catId, goal);
-        }     
+        addGoal(user.id, catId, goal);
     };
 
     return(
@@ -51,11 +45,13 @@ const GoalForm: React.FC<Props> = ({user, catId, addGoal, isPosting}) => {
                 name='name'
                 onChange={e => setGoal({name: e.target.value})}
             />
-            {err && <span className='auth-err'>must submit a goal name</span>}
             {isPosting === true ?
                 <Loader />
                 :
-                <button onClick={handleSubmit}>Add Goal</button>
+                <button 
+                    onClick={handleSubmit}
+                    disabled={goal.name.length === 0}
+                >Add Goal</button>
             }
         </form>
     );
